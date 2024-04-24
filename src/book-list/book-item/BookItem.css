@@ -1,0 +1,46 @@
+.book-item {
+  width: 200px;
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+
+.book-item img {
+  width: 150px;
+  height: 200px;
+  object-fit: adjust;
+}
+
+.book-item h2 {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  text-align: left;
+}
+
+.book-item h3 {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.1rem;
+  font-weight: 450;
+  margin-bottom: 0.2rem;
+  margin-top: 0.2rem;
+  text-align: left;
+}
+
+.book-item p {
+  font-size: 1rem;
+  text-align: left;
+  margin-top: 0.2rem;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+}
