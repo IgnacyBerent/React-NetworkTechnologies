@@ -2,6 +2,7 @@ import { Rating } from '@mui/material';
 import './BookItem.css';
 
 interface BookItemProps {
+  id: number;
   img: string;
   title: string;
   author: string;
