@@ -3,6 +3,9 @@
   margin-bottom: 2rem;
   margin-right: 2rem;
   margin-left: 2rem;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .book-item img {

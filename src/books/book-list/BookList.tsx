@@ -5,14 +5,14 @@ import './BookList.css';
 const books = [
   {
     id: 1,
-    img: 'https://m.media-amazon.com/images/I/81YkqyaFVEL._SY425_.jpg',
+    img: 'https://media.libris.to/jacket/18938641_thus-spoke-zarathustra.jpg',
     title: 'Thus Spoke Zarathustra',
     author: 'Frederick Nietzsche',
     rating: 4.5,
   },
   {
     id: 2,
-    img: 'https://m.media-amazon.com/images/I/81YkqyaFVEL._SY425_.jpg',
+    img: 'https://www.jkrowling.com/wp-content/uploads/2016/10/HPATPS_Hero_OnGrey.png',
     title: "Harry Potter and the Philosopher's Stone",
     author: 'J.K. Rowling',
     rating: 4.0,
@@ -22,21 +22,21 @@ const books = [
     img: 'https://m.media-amazon.com/images/I/81YkqyaFVEL._SY425_.jpg',
     title: 'Atomic Habbits',
     author: 'James Clear',
-    rating: 2.6,
+    rating: 4.8,
   },
   {
     id: 4,
-    img: 'https://m.media-amazon.com/images/I/81YkqyaFVEL._SY425_.jpg',
-    title: 'Atomic Habbits',
-    author: 'James Clear',
-    rating: 2.6,
+    img: 'https://ecsmedia.pl/cdn-cgi/image/format=webp,width=544,height=544,/c/48-laws-of-power-b-iext147730049.jpg',
+    title: '48 Laws of Power',
+    author: 'Robert Greene',
+    rating: 4.2,
   },
   {
     id: 5,
-    img: 'https://m.media-amazon.com/images/I/81YkqyaFVEL._SY425_.jpg',
-    title: 'Atomic Habbits',
-    author: 'James Clear',
-    rating: 2.6,
+    img: 'https://ecsmedia.pl/cdn-cgi/image/format=webp,width=544,height=544,/c/money-master-the-game-b-iext146391756.jpg',
+    title: 'Money Master the Game',
+    author: 'Tony Robbins',
+    rating: 3.5,
   },
 ];
 
