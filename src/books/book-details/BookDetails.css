@@ -1,14 +1,23 @@
+body {
+  background-color: #dfdfdf; /* Replace with the shade of grey you want */
+}
+
 .book-details-container {
-  padding: 50px;
-  /* styles for the Grid container */
+  padding-bottom: 50px;
+  padding-left: 150px;
+  padding-right: 150px;
 }
 
 .book-cover-container {
-  /* styles for the Grid item containing the book cover */
+  background-color: #f8f8f8;
 }
 
 .book-cover-wrapper {
   width: 90%;
+  margin-bottom: 40px;
+  position: sticky;
+  top: 0;
+  padding-left: 15px;
 }
 
 .book-cover {
@@ -16,13 +25,15 @@
 }
 
 .book-details-card {
-  /* styles for the Grid item containing the book details */
+  padding-bottom: 40px;
+  background-color: #f8f8f8;
+  padding-right: 15px;
 }
 
 .book-details-content {
   padding-top: 20px;
   text-align: left;
-  /* other styles for the book details */
+  background-color: #f8f8f8;
 }
 
 .book-details-container .book-title {
@@ -31,13 +42,9 @@
 }
 
 .book-details-container .book-summary {
-  font-size: 16px; /* Adjust to your desired size */
+  font-size: 16px;
   padding-top: 15px;
   padding-bottom: 15px;
-}
-
-.book-rating {
-  /* styles for the book rating */
 }
 
 .book-details-container .book-details-text {
@@ -48,8 +55,7 @@
 }
 
 .book-details-list {
-  padding-bottom: 50px;
-  /* styles for the book details list */
+  padding-bottom: 40px;
 }
 
 .grid-item .MuiTypography-root {
@@ -70,6 +76,6 @@
 }
 
 .wide-button {
-  width: 100%; /* This will make the button wider */
-  text-align: center; /* This will center the text */
+  width: 100%;
+  text-align: center;
 }

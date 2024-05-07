@@ -1,4 +1,5 @@
 import './BookDetails.css';
+import Review from './Review';
 
 import {
   Card,
@@ -6,65 +7,79 @@ import {
   CardContent,
   Typography,
   Button,
-  List,
-  ListItem,
-  ListItemText,
   Grid,
 } from '@mui/material';
 import { Rating } from '@mui/material';
 
+const reviews = [
+  {
+    username: 'John',
+    rating: 5,
+    comment: 'Great book!',
+    date: '2022-01-01',
+  },
+  {
+    username: 'Jane',
+    rating: 4,
+    comment: 'I loved it!',
+    date: '2022-01-02',
+  },
+  {
+    username: 'Jack',
+    rating: 3,
+    comment: 'It was ok.',
+    date: '2022-01-03',
+  },
+];
+
 interface BookDetailsProps {
-  id: number;
-  img: string;
-  title: string;
-  author: string;
-  isbn: string;
-  publicationYear: number;
-  publisher: string;
-  rating: number;
-  ratingCount: number;
-  genre: string;
-  summary: string;
+  bookDetails: {
+    id: number;
+    img: string;
+    title: string;
+    author: string;
+    isbn: string;
+    publicationYear: number;
+    publisher: string;
+    rating: number;
+    ratingCount: number;
+    genre: string;
+    summary: string;
+    availableCopies: number;
+  };
 }
 
-function BookDetails({
-  img,
-  title,
-  author,
-  isbn,
-  publicationYear,
-  publisher,
-  rating,
-  ratingCount,
-  genre,
-  summary,
-}: BookDetailsProps) {
+function BookDetails({ bookDetails }: BookDetailsProps) {
   return (
     <Grid container className="book-details-container">
       <Grid item xs={4} className="book-cover-container">
         <div className="book-cover-wrapper">
-          <CardMedia component="img" image={img} className="book-cover" />
+          <CardMedia
+            component="img"
+            image={bookDetails.img}
+            className="book-cover"
+          />
         </div>
       </Grid>
       <Grid item xs={8} className="book-details-card">
         <Card>
           <CardContent className="book-details-content">
             <Typography variant="h5" className="book-title">
-              {title}
+              {bookDetails.title}
             </Typography>
             <div className="rating-container">
               Rating:{' '}
               <Rating
                 name="read-only"
-                value={rating}
+                value={bookDetails.rating}
                 precision={0.1}
                 readOnly
               />{' '}
-              {rating}/5 ({ratingCount})
+              {bookDetails.rating}/5 ({bookDetails.ratingCount})
             </div>
             <hr />
             <Typography variant="body2" className="book-summary">
-              {summary}
+              {bookDetails.summary}
             </Typography>
             <hr />
             <Typography variant="h6" gutterBottom className="book-details-text">
@@ -76,31 +91,37 @@ function BookDetails({
                 <Typography>Author:</Typography>
               </Grid>
               <Grid item xs={6} className="grid-val">
-                <Typography>{author}</Typography>
+                <Typography>{bookDetails.author}</Typography>
               </Grid>
               <Grid item xs={6} className="grid-item">
                 <Typography>Publication Year:</Typography>
               </Grid>
               <Grid item xs={6} className="grid-val">
-                <Typography>{publicationYear}</Typography>
+                <Typography>{bookDetails.publicationYear}</Typography>
               </Grid>
               <Grid item xs={6} className="grid-item">
                 <Typography>Genre:</Typography>
               </Grid>
               <Grid item xs={6} className="grid-val">
-                <Typography>{genre}</Typography>
+                <Typography>{bookDetails.genre}</Typography>
               </Grid>
               <Grid item xs={6} className="grid-item">
                 <Typography>Publisher:</Typography>
               </Grid>
               <Grid item xs={6} className="grid-val">
-                <Typography>{publisher}</Typography>
+                <Typography>{bookDetails.publisher}</Typography>
               </Grid>
               <Grid item xs={6} className="grid-item">
                 <Typography>ISBN:</Typography>
               </Grid>
               <Grid item xs={6} className="grid-val">
-                <Typography>{isbn}</Typography>
+                <Typography>{bookDetails.isbn}</Typography>
+              </Grid>
+              <Grid item xs={6} className="grid-item">
+                <Typography>Available Copies:</Typography>
+              </Grid>
+              <Grid item xs={6} className="grid-val">
+                <Typography>{bookDetails.availableCopies}</Typography>
               </Grid>
             </Grid>
             <Button className="wide-button" variant="contained" color="primary">
@@ -109,6 +130,11 @@ function BookDetails({
           </CardContent>
         </Card>
       </Grid>
+      {reviews.map((review, index) => (
+        <Grid item xs={12} key={index}>
+          <Review review={review} />
+        </Grid>
+      ))}
     </Grid>
   );
 }
