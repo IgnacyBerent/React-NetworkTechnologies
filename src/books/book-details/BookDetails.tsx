@@ -35,6 +35,22 @@ const reviews = [
   },
 ];
 
+const bookDetails = {
+  id: 1,
+  img: 'https://media.libris.to/jacket/18938641_thus-spoke-zarathustra.jpg',
+  title: 'Thus Spoke Zarathustra',
+  author: 'Frederick Nietzsche',
+  isbn: '978-0-14-044118-5',
+  publicationYear: 1883,
+  publisher: 'Penguin Books',
+  rating: 4.5,
+  ratingCount: 101,
+  genre: 'Philosophy',
+  summary:
+    "Thus Spoke Zarathustra is a philosophical novel by German philosopher Friedrich Nietzsche, composed in four parts written and published between 1883 and 1885. Much of the work deals with ideas such as the 'eternal recurrence of the same', the parable on the 'death of God', and the 'prophecy' of the Übermensch, which were first introduced.",
+  availableCopies: 5,
+} as BookDetailsProps['bookDetails'];
+
 interface BookDetailsProps {
   bookDetails: {
     id: number;
@@ -52,7 +68,7 @@ interface BookDetailsProps {
   };
 }
 
-function BookDetails({ bookDetails }: BookDetailsProps) {
+function BookDetails() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <MenuAppBar />

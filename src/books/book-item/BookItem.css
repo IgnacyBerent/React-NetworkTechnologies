@@ -1,4 +1,7 @@
 .book-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 200px;
   margin-bottom: 2rem;
   margin-right: 2rem;
@@ -23,6 +26,7 @@
   font-weight: 600;
   margin-bottom: 0.2rem;
   text-align: left;
+  font-family: 'Lato', sans-serif;
 }
 
 .book-item h3 {
@@ -35,17 +39,16 @@
   margin-bottom: 0.2rem;
   margin-top: 0.2rem;
   text-align: left;
-}
-
-.book-item p {
-  font-size: 1rem;
-  text-align: left;
-  margin-top: 0.2rem;
+  font-family: 'Karla', sans-serif;
 }
 
 .rating-container {
   display: flex;
-  align-items: center;
+  font-family: 'Karla', sans-serif;
+  align-self: flex-start;
+  font-size: 1rem;
+  text-align: left;
+  margin-top: 0.2rem;
 }
 
 .book-item-link {

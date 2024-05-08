@@ -1,0 +1,45 @@
+hr {
+  border: 0;
+  clear: both;
+  display: block;
+  width: 96%;
+  background-color: #222222;
+  height: 2px;
+}
+
+body {
+  background-color: #f8f8f8;
+}
+
+.boxContainer {
+  margin-top: 80px;
+  margin-left: 50px;
+  margin-right: 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.boxContainer {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.infoBox {
+  padding: 20px;
+  margin: 10px;
+}
+
+.description {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-family: 'Karla', sans-serif;
+}
+
+.title {
+  font-size: 30px;
+  font-family: 'Lato', sans-serif;
+  align-self: center;
+}
