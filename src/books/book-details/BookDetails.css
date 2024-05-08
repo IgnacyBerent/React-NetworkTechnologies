@@ -3,6 +3,7 @@ body {
 }
 
 .book-details-container {
+  margin-top: 80px;
   padding-bottom: 50px;
   padding-left: 150px;
   padding-right: 150px;
@@ -13,6 +14,7 @@ body {
 }
 
 .book-cover-wrapper {
+  margin-top: 10px;
   width: 90%;
   margin-bottom: 40px;
   position: sticky;
@@ -25,6 +27,7 @@ body {
 }
 
 .book-details-card {
+  padding-top: 10px;
   padding-bottom: 40px;
   background-color: #f8f8f8;
   padding-right: 15px;

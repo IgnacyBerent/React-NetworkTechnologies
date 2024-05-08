@@ -1,6 +1,9 @@
-import { idText } from 'typescript';
+import { Box } from '@mui/material';
+import MenuAppBar from '../../app-bar/MenuAppBar';
 import BookItem from '../book-item/BookItem';
 import './BookList.css';
+
+import { Link, Outlet } from 'react-router-dom';
 
 const books = [
   {
@@ -42,18 +45,24 @@ const books = [
 
 function BookList() {
   return (
-    <div className="book-list">
-      {books.map((book, index) => (
-        <BookItem
-          key={index}
-          id={book.id}
-          img={book.img}
-          title={book.title}
-          author={book.author}
-          rating={book.rating}
-        />
-      ))}
-    </div>
+    <Box sx={{ flexGrow: 1 }}>
+      <MenuAppBar />
+      <Box>
+        <div className="book-list">
+          {books.map((book, index) => (
+            <BookItem
+              key={index}
+              id={book.id}
+              img={book.img}
+              title={book.title}
+              author={book.author}
+              rating={book.rating}
+            />
+          ))}
+        </div>
+      </Box>
+      <Outlet />
+    </Box>
   );
 }
 

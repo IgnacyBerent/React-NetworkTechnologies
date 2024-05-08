@@ -4,24 +4,33 @@ import LoginIcon from '@mui/icons-material/Login';
 import { Formik } from 'formik';
 import { useCallback, useMemo } from 'react';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+  const navigate = useNavigate();
   const initialValues = { username: '', password: '' };
+
   const onSubmit = useCallback(
     (values: { username: string; password: string }, formik: any) => {
-      console.log(values);
+      navigate('/home');
+      console.log('/home');
     },
-    [],
+    [navigate],
   );
 
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
         username: yup.string().required('Requierd'),
-        password: yup.string().required('Requierd').min(5, 'Password to short'),
+        password: yup
+          .string()
+          .required('Requierd')
+          .min(5, 'Password too short'),
       }),
     [],
   );
+
+  console.log('LoginForm render');
 
   return (
     <div className="background-image">
