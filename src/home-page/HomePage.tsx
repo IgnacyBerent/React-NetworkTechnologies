@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import MenuAppBar from '../app-bar/MenuAppBar';
 import { Link, Outlet } from 'react-router-dom';
 import './HomePage.css';
