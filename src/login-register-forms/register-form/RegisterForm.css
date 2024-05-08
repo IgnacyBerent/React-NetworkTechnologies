@@ -1,13 +1,16 @@
 .background-image {
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background-image: url('https://basecamplive.com/wp-content/uploads/2023/02/books.jpeg');
   background-position: center;
   background-size: cover;
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 1000px;
 }
 
 .background-image::before {
@@ -20,7 +23,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.login-form-container {
+.register-form-container {
   position: relative;
   background-color: white;
   padding: 2rem;
@@ -29,10 +32,10 @@
   align-items: center;
   box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.75);
   border-radius: 10px;
-  height: 80%;
+  height: 550px;
 }
 
-.login-form-container h1 {
+.register-form-container h1 {
   margin-top: 1rem;
   margin-bottom: 0rem;
   font-size: 35px;
@@ -40,14 +43,14 @@
   font-weight: 800;
 }
 
-.login-form-container h2 {
+.register-form-container h2 {
   margin-bottom: 3rem;
   font-size: 25px;
   color: #333;
   font-weight: 800;
 }
 
-.login-form {
+.register-form {
   padding: 10px;
   display: flex;
   gap: 2rem;
@@ -56,7 +59,7 @@
   align-items: center;
 }
 
-.create-account-button {
+.have-account-button {
   width: 100%;
   background-color: grey;
   color: white;
@@ -67,7 +70,7 @@
   text-transform: uppercase;
 }
 
-.login-button {
+.register-button {
   width: 100%;
 }
 

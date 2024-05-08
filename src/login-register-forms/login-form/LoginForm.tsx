@@ -86,7 +86,12 @@ function LoginForm() {
                 Login
               </Button>
             </form>
-            <button className="create-account-button">CREATE AN ACCOUNT</button>
+            <button
+              className="create-account-button"
+              onClick={() => navigate('/register')}
+            >
+              CREATE AN ACCOUNT
+            </button>
           </div>
         )}
       </Formik>
