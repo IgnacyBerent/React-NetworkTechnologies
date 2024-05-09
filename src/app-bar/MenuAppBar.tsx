@@ -8,7 +8,14 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
+import BookIcon from '@mui/icons-material/Book';
+import HomeIcon from '@mui/icons-material/Home';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 export default function MenuAppBar() {
+  const navigate = useNavigate();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -35,6 +42,16 @@ export default function MenuAppBar() {
           Photos
         </Typography>
         <div>
+          <Link to="/home">
+            <IconButton color="inherit">
+              <HomeIcon />
+            </IconButton>
+          </Link>
+          <Link to="/books">
+            <IconButton color="inherit">
+              <BookIcon />
+            </IconButton>
+          </Link>
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -60,8 +77,46 @@ export default function MenuAppBar() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                navigate('/profile');
+              }}
+            >
+              My Profile
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                navigate('/my_reviews');
+              }}
+            >
+              My Reviews
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                navigate('/my_loans');
+              }}
+            >
+              My Loans
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                navigate('/help');
+              }}
+            >
+              Help
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                navigate('/login');
+              }}
+            >
+              Sign Out
+            </MenuItem>
           </Menu>
         </div>
       </Toolbar>

@@ -1,5 +1,5 @@
 import './BookDetails.css';
-import Review from './Review';
+import Review from './review/Review';
 import { Outlet } from 'react-router-dom';
 
 import {
