@@ -22,7 +22,7 @@
 
 .login-form-container {
   position: relative;
-  background-color: white;
+  background-color: rgba(247, 247, 247);
   padding: 2rem;
   display: flex;
   flex-direction: column;
