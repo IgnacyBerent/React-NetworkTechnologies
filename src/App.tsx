@@ -11,7 +11,7 @@ import {
 import ProfilePage from './profle-page/ProfilePage';
 import HelpPage from './help-page/HelpPage';
 import MyReviews from './my_reviews/MyReviews';
-import MyLoans from './my_loans/MyLoans';
+import MyLoans from './my-loans/my-loans-page/MyLoansPage';
 
 function App() {
   return (

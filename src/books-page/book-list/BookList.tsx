@@ -48,7 +48,7 @@ function BookList() {
     <Box sx={{ flexGrow: 1 }}>
       <MenuAppBar />
       <Box>
-        <div className="book-list">
+        <div className="loan-list">
           {books.map((book, index) => (
             <BookItem
               key={index}

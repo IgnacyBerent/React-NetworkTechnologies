@@ -1,0 +1,86 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 50px;
+  padding: 10px 20px 10px 10px;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.book-image {
+  width: 115px;
+  height: 150px;
+  margin-right: 20px;
+  object-fit: adjust;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.title {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Lato', sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  max-lines: 3;
+  align-self: flex-start;
+}
+
+.author {
+  margin-top: 4px;
+  font-family: 'Karla', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  align-self: flex-start;
+}
+
+.date {
+  margin-bottom: 0;
+  font-family: 'Karla', sans-serif;
+  font-weight: 600;
+}
+
+.button {
+  width: 110px;
+  height: 30px;
+  cursor: pointer;
+  background-color: grey !important;
+  color: white !important;
+  border-radius: 10px !important;
+  font-family: 'Karla', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 14px !important;
+}
+
+.dates-container {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+  width: 200px;
+}
+
+.book-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  height: 150px;
+  width: 250px;
+}
+
+.conent-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.buttons-container {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+  gap: 30px;
+}
