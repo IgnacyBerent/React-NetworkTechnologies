@@ -13,7 +13,6 @@ function LoginForm() {
   const onSubmit = useCallback(
     (values: { username: string; password: string }, formik: any) => {
       navigate('/home');
-      console.log('/home');
     },
     [navigate],
   );
@@ -29,8 +28,6 @@ function LoginForm() {
       }),
     [],
   );
-
-  console.log('LoginForm render');
 
   return (
     <div className="background-image">

@@ -8,6 +8,7 @@ import LoanItem from '../loan-item/LoanItem';
 const loans = [
   {
     loanId: 1,
+    bookId: 1,
     bookImage:
       'https://media.libris.to/jacket/18938641_thus-spoke-zarathustra.jpg',
     bookTitle: 'Thus Spoke Zarathustra',
@@ -18,6 +19,7 @@ const loans = [
   },
   {
     loanId: 2,
+    bookId: 2,
     bookImage:
       'https://www.jkrowling.com/wp-content/uploads/2016/10/HPATPS_Hero_OnGrey.png',
     bookTitle: "Harry Potter and the Philosopher's Stone",
@@ -28,6 +30,7 @@ const loans = [
   },
   {
     loanId: 3,
+    bookId: 3,
     bookImage: 'https://m.media-amazon.com/images/I/81YkqyaFVEL._SY425_.jpg',
     bookTitle: 'Atomic Habbits',
     author: 'James Clear',
@@ -47,6 +50,7 @@ function MyLoans() {
             <LoanItem
               key={index}
               loanId={loan.loanId}
+              bookId={loan.bookId}
               bookImage={loan.bookImage}
               bookTitle={loan.bookTitle}
               author={loan.author}

@@ -3,7 +3,7 @@ import MenuAppBar from '../../app-bar/MenuAppBar';
 import BookItem from '../book-item/BookItem';
 import './BookList.css';
 
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 const books = [
   {
@@ -48,7 +48,7 @@ function BookList() {
     <Box sx={{ flexGrow: 1 }}>
       <MenuAppBar />
       <Box>
-        <div className="loan-list">
+        <div className="book-list">
           {books.map((book, index) => (
             <BookItem
               key={index}

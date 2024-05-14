@@ -12,6 +12,7 @@ import ProfilePage from './profle-page/ProfilePage';
 import HelpPage from './help-page/HelpPage';
 import MyReviews from './my_reviews/MyReviews';
 import MyLoans from './my-loans/my-loans-page/MyLoansPage';
+import AddBookReviewPage from './my-loans/add-book-review-page/AddBookReviewPage';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/my_reviews" element={<MyReviews />} />
         <Route path="/my_loans" element={<MyLoans />} />
         <Route path="/bookDetail/:bookId" element={<BookDetails />} />
+        <Route path="/addBookReview/:bookId" element={<AddBookReviewPage />} />
       </Routes>
     </Router>
   );
