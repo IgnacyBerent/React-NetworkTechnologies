@@ -44,7 +44,7 @@ function LoanItem({
         {!returnDate && (
           <Button
             className="button"
-            onClick={() => navigate(`/AddBookReviewPage/${bookId}`)}
+            onClick={() => navigate(`/addBookReview/${bookId}`)}
           >
             Return Loan
           </Button>
