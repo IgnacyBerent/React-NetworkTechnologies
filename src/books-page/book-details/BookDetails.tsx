@@ -1,6 +1,6 @@
 import './BookDetails.css';
 import Review from './review/Review';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 
 import {
   Card,
@@ -13,6 +13,10 @@ import {
 } from '@mui/material';
 import { Rating } from '@mui/material';
 import MenuAppBar from '../../app-bar/MenuAppBar';
+import { useEffect, useState } from 'react';
+import { useApi } from '../../api/ApiProvider';
+import { GetBookDetailsDto } from '../../api/dto/book-details.dto';
+import { ClientResponse } from '../../api/library-client';
 
 const reviews = [
   {
@@ -35,40 +39,32 @@ const reviews = [
   },
 ];
 
-const bookDetails = {
-  id: 1,
-  img: 'https://media.libris.to/jacket/18938641_thus-spoke-zarathustra.jpg',
-  title: 'Thus Spoke Zarathustra',
-  author: 'Frederick Nietzsche',
-  isbn: '978-0-14-044118-5',
-  publicationYear: 1883,
-  publisher: 'Penguin Books',
-  rating: 4.5,
-  ratingCount: 101,
-  genre: 'Philosophy',
-  summary:
-    "Thus Spoke Zarathustra is a philosophical novel by German philosopher Friedrich Nietzsche, composed in four parts written and published between 1883 and 1885. Much of the work deals with ideas such as the 'eternal recurrence of the same', the parable on the 'death of God', and the 'prophecy' of the Übermensch, which were first introduced.",
-  availableCopies: 5,
-} as BookDetailsProps['bookDetails'];
-
-interface BookDetailsProps {
-  bookDetails: {
-    id: number;
-    img: string;
-    title: string;
-    author: string;
-    isbn: string;
-    publicationYear: number;
-    publisher: string;
-    rating: number;
-    ratingCount: number;
-    genre: string;
-    summary: string;
-    availableCopies: number;
-  };
-}
-
 function BookDetails() {
+  const apiClient = useApi();
+
+  const { bookId } = useParams();
+  const [bookDetails, setBookDetails] = useState<GetBookDetailsDto | null>(
+    null,
+  );
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    apiClient
+      .getBookDetails(Number(bookId))
+      .then((response: ClientResponse<GetBookDetailsDto | null>) => {
+        if (response.success) {
+          setBookDetails(response.data);
+        } else {
+          // handle error
+        }
+        setLoading(false);
+      });
+  }, [apiClient, bookId]);
+
+  if (loading || !bookDetails) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <MenuAppBar />
@@ -97,7 +93,16 @@ function BookDetails() {
                     precision={0.1}
                     readOnly
                   />{' '}
-                  {bookDetails.rating}/5 ({bookDetails.ratingCount})
+                  {bookDetails.rating}/5 &nbsp;
+                  <a href="#commentSection" className="review-link">
+                    (
+                    <span
+                      style={{ textDecoration: 'underline', color: 'blue' }}
+                    >
+                      {bookDetails.ratingCount}
+                    </span>
+                    )
+                  </a>
                 </div>
                 <hr />
                 <Typography variant="body2" className="book-summary">
@@ -159,6 +164,7 @@ function BookDetails() {
                 </Button>
               </CardContent>
             </Card>
+            <div id="commentSection"></div>
           </Grid>
           {reviews.map((review, index) => (
             <Grid item xs={12} key={index}>

@@ -33,7 +33,6 @@ function BookList() {
         await apiClient.getBooks(page);
       if (response.success) {
         setBooks((prevBooks) => {
-          // Only append new books if we're fetching the next page
           const newBooks =
             page > 0
               ? [...(prevBooks?.books || []), ...response.data!.books]

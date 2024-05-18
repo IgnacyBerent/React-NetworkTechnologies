@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { LoginDto, LoginResponseDto } from './dto/login.dto';
 import { GetBooksPageDto } from './dto/book-page.dto';
+import { GetBookDetailsDto } from './dto/book-details.dto';
 
 export type ClientResponse<T> = {
   success: boolean;
@@ -56,6 +57,28 @@ export class LibraryClient {
             size: 8,
           },
         },
+      );
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      return {
+        success: false,
+        data: null,
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
+  }
+
+  public async getBookDetails(
+    id: number,
+  ): Promise<ClientResponse<GetBookDetailsDto | null>> {
+    try {
+      const response: AxiosResponse<GetBookDetailsDto> = await this.client.get(
+        `books/details/${id}`,
       );
       return {
         success: true,
