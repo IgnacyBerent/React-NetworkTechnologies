@@ -1,22 +1,109 @@
-import { Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import MenuAppBar from '../app-bar/MenuAppBar';
 import { Link, Outlet } from 'react-router-dom';
 import './HomePage.css';
+import News from './news/News';
 
 function HomePage() {
   return (
-    <div>
+    <Box sx={{ backgroundColor: '#f8f8f8' }}>
       <MenuAppBar />
-      <div className="boxContainer">
-        <p className="title">Welcome to Our Library</p>
-        <hr />
-        <p className="description">
-          Welcome to our library! We have a wide variety of books for you to
-          borrow. Our collection ranges from classic literature and science
-          fiction to the latest bestsellers. Whether you're looking for a good
-          mystery or want to delve into the world of non-fiction, we've got you
-          covered.
-        </p>
+      <div className="mainBoxContainer">
+        <hr className="hr1" />
+        <Box
+          className="imageBox"
+          sx={{
+            backgroundImage:
+              "url('https://basecamplive.com/wp-content/uploads/2023/02/books.jpeg')",
+            backgroundPosition: '35% 0',
+            backgroundRepeat: 'no-repeat',
+            color: 'white',
+            padding: '1em',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+            marginX: '15em',
+            marginY: '1em',
+            height: '30vh',
+          }}
+        >
+          <Typography
+            component="div"
+            sx={{
+              width: '60%',
+              fontSize: '3.1em',
+              fontWeight: 'bold',
+              fontFamily: 'lato',
+              marginY: '0',
+              lineHeight: '0.9',
+            }}
+          >
+            Do you want to dive into a new world?
+          </Typography>
+          <Typography
+            component="div"
+            sx={{
+              fontSize: '1.2em',
+              fontFamily: 'karla',
+              marginTop: '0.6em',
+            }}
+          >
+            FIND OUT WHAT WE HAVE TO OFFER
+          </Typography>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: 'white',
+              color: 'black',
+              borderRadius: '30px',
+              width: '10em',
+              fontFamily: 'karla',
+              fontWeight: 'bold',
+              fontSize: '1.0em',
+              marginTop: '1em',
+              '&:hover': {
+                backgroundColor: '#333',
+              },
+            }}
+            component={Link}
+            to="/books"
+          >
+            DIVE NOW
+          </Button>
+        </Box>
+        <hr className="hr1" />
+        <Typography
+          sx={{
+            fontSize: '2em',
+            fontWeight: 'bold',
+            fontFamily: 'lato',
+            marginY: '0',
+            color: '#222',
+            marginLeft: '2.5em',
+            marginTop: '1em',
+          }}
+        >
+          News
+        </Typography>
+        <hr className="hr2" />
+        <div className="boxContainer">
+          <News />
+        </div>
+        <Typography
+          sx={{
+            fontSize: '2em',
+            fontWeight: 'bold',
+            fontFamily: 'lato',
+            marginY: '0',
+            color: '#222',
+            marginLeft: '2.5em',
+            marginTop: '1em',
+          }}
+        >
+          Fun Facts
+        </Typography>
+        <hr className="hr2" />
         <p className="description">
           Reading is a great way to relax and learn new things. It can improve
           your memory and concentration, and it can even reduce stress.
@@ -24,12 +111,21 @@ function HomePage() {
           stress by up to 68%. It's a more effective stress reduction method
           than listening to music or going for a walk.
         </p>
-        <Button variant="contained" component={Link} to="/books" sx={{ m: 1 }}>
-          Books
-        </Button>
+        <p className="description">
+          Did you know that reading can actually increase your lifespan? A study
+          conducted by Yale University found that people who read books for 30
+          minutes a day lived an average of 23 months longer than non-readers or
+          magazine readers.
+        </p>
+        <p className="description">
+          Reading not only improves your brain's connectivity but also increases
+          your emotional intelligence. By reading, you are exposed to a variety
+          of emotions and situations that can help you understand and empathize
+          with others better.
+        </p>
       </div>
       <Outlet />
-    </div>
+    </Box>
   );
 }
 

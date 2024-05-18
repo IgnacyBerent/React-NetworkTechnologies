@@ -3,6 +3,7 @@ import { LoginDto, LoginResponseDto } from './dto/login.dto';
 import { BooksPageDto } from './dto/book-page.dto';
 import { GetBookDetailsDto } from './dto/book-details.dto';
 import { ReviewsPageDto } from './dto/review.dto';
+import { NewsDto } from './dto/news.dto';
 
 export type ClientResponse<T> = {
   success: boolean;
@@ -110,6 +111,25 @@ export class LibraryClient {
           },
         },
       );
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      return {
+        success: false,
+        data: null,
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
+  }
+
+  public async getNews(): Promise<ClientResponse<NewsDto[] | null>> {
+    try {
+      const response: AxiosResponse<NewsDto[]> =
+        await this.client.get('news/fetch');
       return {
         success: true,
         data: response.data,
