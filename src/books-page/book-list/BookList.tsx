@@ -4,61 +4,88 @@ import BookItem from '../book-item/BookItem';
 import './BookList.css';
 
 import { Outlet } from 'react-router-dom';
-
-const books = [
-  {
-    id: 1,
-    img: 'https://media.libris.to/jacket/18938641_thus-spoke-zarathustra.jpg',
-    title: 'Thus Spoke Zarathustra',
-    author: 'Frederick Nietzsche',
-    rating: 4.5,
-  },
-  {
-    id: 2,
-    img: 'https://www.jkrowling.com/wp-content/uploads/2016/10/HPATPS_Hero_OnGrey.png',
-    title: "Harry Potter and the Philosopher's Stone",
-    author: 'J.K. Rowling',
-    rating: 4.0,
-  },
-  {
-    id: 3,
-    img: 'https://m.media-amazon.com/images/I/81YkqyaFVEL._SY425_.jpg',
-    title: 'Atomic Habbits',
-    author: 'James Clear',
-    rating: 4.8,
-  },
-  {
-    id: 4,
-    img: 'https://ecsmedia.pl/cdn-cgi/image/format=webp,width=544,height=544,/c/48-laws-of-power-b-iext147730049.jpg',
-    title: '48 Laws of Power',
-    author: 'Robert Greene',
-    rating: 4.2,
-  },
-  {
-    id: 5,
-    img: 'https://ecsmedia.pl/cdn-cgi/image/format=webp,width=544,height=544,/c/money-master-the-game-b-iext146391756.jpg',
-    title: 'Money Master the Game',
-    author: 'Tony Robbins',
-    rating: 3.5,
-  },
-];
+import { useApi } from '../../api/ApiProvider';
+import { useEffect, useState, useRef, useCallback } from 'react';
+import { GetBooksPageDto } from '../../api/dto/book-page.dto';
+import { ClientResponse } from '../../api/library-client';
 
 function BookList() {
+  const apiClient = useApi();
+  const [books, setBooks] = useState<GetBooksPageDto | null>(null);
+  const [page, setPage] = useState(0);
+  const observer = useRef<IntersectionObserver | null>(null);
+  const lastBookElementRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && books?.hasMore) {
+          setPage((prevPage) => prevPage + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [books],
+  );
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const response: ClientResponse<GetBooksPageDto | null> =
+        await apiClient.getBooks(page);
+      if (response.success) {
+        setBooks((prevBooks) => {
+          // Only append new books if we're fetching the next page
+          const newBooks =
+            page > 0
+              ? [...(prevBooks?.books || []), ...response.data!.books]
+              : response.data!.books;
+          return {
+            ...response.data,
+            books: newBooks,
+            currentPage: response.data!.currentPage || 0,
+            totalPages: response.data!.totalPages || 0,
+            totalItems: response.data!.totalItems || 0,
+            hasMore: response.data!.hasMore || false,
+          };
+        });
+      } else {
+        console.error('Error during fetching books');
+      }
+    };
+
+    fetchBooks();
+  }, [apiClient, page]);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <MenuAppBar />
       <Box>
         <div className="book-list">
-          {books.map((book, index) => (
-            <BookItem
-              key={index}
-              id={book.id}
-              img={book.img}
-              title={book.title}
-              author={book.author}
-              rating={book.rating}
-            />
-          ))}
+          {books?.books.map((book, index) => {
+            if (books.books.length === index + 1) {
+              return (
+                <BookItem
+                  ref={lastBookElementRef}
+                  key={index}
+                  id={book.id}
+                  img={book.img}
+                  title={book.title}
+                  author={book.author}
+                  rating={book.rating}
+                />
+              );
+            } else {
+              return (
+                <BookItem
+                  key={index}
+                  id={book.id}
+                  img={book.img}
+                  title={book.title}
+                  author={book.author}
+                  rating={book.rating}
+                />
+              );
+            }
+          })}
         </div>
       </Box>
       <Outlet />
