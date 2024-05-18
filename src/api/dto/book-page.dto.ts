@@ -7,7 +7,7 @@ export class BookDto {
   isAvailable!: boolean;
 }
 
-export class GetBooksPageDto {
+export class BooksPageDto {
   books!: BookDto[];
   currentPage!: number;
   totalPages!: number;

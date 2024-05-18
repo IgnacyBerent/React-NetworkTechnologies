@@ -6,12 +6,12 @@ import './BookList.css';
 import { Outlet } from 'react-router-dom';
 import { useApi } from '../../api/ApiProvider';
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { GetBooksPageDto } from '../../api/dto/book-page.dto';
+import { BooksPageDto } from '../../api/dto/book-page.dto';
 import { ClientResponse } from '../../api/library-client';
 
 function BookList() {
   const apiClient = useApi();
-  const [books, setBooks] = useState<GetBooksPageDto | null>(null);
+  const [books, setBooks] = useState<BooksPageDto | null>(null);
   const [page, setPage] = useState(0);
   const observer = useRef<IntersectionObserver | null>(null);
   const lastBookElementRef = useCallback(
@@ -29,14 +29,17 @@ function BookList() {
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const response: ClientResponse<GetBooksPageDto | null> =
+      const response: ClientResponse<BooksPageDto | null> =
         await apiClient.getBooks(page);
       if (response.success) {
+        const availableBooks = response.data!.books.filter(
+          (book) => !book.isAvailable,
+        );
         setBooks((prevBooks) => {
           const newBooks =
             page > 0
-              ? [...(prevBooks?.books || []), ...response.data!.books]
-              : response.data!.books;
+              ? [...(prevBooks?.books || []), ...availableBooks]
+              : availableBooks;
           return {
             ...response.data,
             books: newBooks,

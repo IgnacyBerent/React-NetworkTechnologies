@@ -1,13 +1,9 @@
 import { Typography, Grid, Box, Avatar, Rating } from '@mui/material';
 import './Review.css';
+import { ReviewDto } from '../../../api/dto/review.dto';
 
 interface ReviewProps {
-  review: {
-    username: string;
-    rating: number;
-    comment: string;
-    date: string;
-  };
+  review: ReviewDto;
 }
 
 function Review({ review }: ReviewProps) {
@@ -17,7 +13,7 @@ function Review({ review }: ReviewProps) {
         <Grid item xs={12} className="review-item">
           <Avatar />
           <Typography variant="body1" className="username">
-            <strong>{review.username}</strong>
+            <strong>{`${review.user.firstName} ${review.user.lastName}`}</strong>{' '}
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -32,7 +28,7 @@ function Review({ review }: ReviewProps) {
         </Grid>
         <Grid item xs={12} className="review-item">
           <Typography variant="body2" className="date">
-            {new Date(review.date).toLocaleDateString()}
+            {new Date(review.reviewDate).toLocaleDateString()}
           </Typography>
         </Grid>
         <Grid item xs={12} className="review-item">
