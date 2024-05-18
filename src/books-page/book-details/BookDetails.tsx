@@ -1,6 +1,6 @@
 import './BookDetails.css';
 import Review from './review/Review';
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import {
   Card,
@@ -21,7 +21,8 @@ import { ReviewsPageDto } from '../../api/dto/review.dto';
 
 function BookDetails() {
   const apiClient = useApi();
-
+  const location = useLocation();
+  const navigate = useNavigate();
   const { bookId } = useParams();
   const [bookDetails, setBookDetails] = useState<GetBookDetailsDto | null>(
     null,
@@ -51,11 +52,15 @@ function BookDetails() {
         if (response.success) {
           setBookDetails(response.data);
         } else {
-          console.error('Error during fetching book details');
+          if (response.statusCode === 401 || response.statusCode === 403) {
+            navigate('/login', { state: { from: location, error: true } });
+          } else {
+            console.error('Failed to fetching details', response.statusCode);
+          }
         }
         setLoading(false);
       });
-  }, [apiClient, bookId]);
+  }, [navigate, location, apiClient, bookId]);
 
   useEffect(() => {
     const fetchReviews = async () => {

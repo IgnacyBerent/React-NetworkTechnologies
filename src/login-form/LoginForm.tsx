@@ -1,16 +1,30 @@
 import './LoginForm.css';
-import { Button, TextField } from '@mui/material';
+import { Alert, Button, Snackbar, TextField } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import { Formik } from 'formik';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import * as yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useApi } from '../api/ApiProvider';
 
 function LoginForm() {
   const navigate = useNavigate();
+  const location = useLocation();
   const apiClient = useApi();
   const initialValues = { username: '', password: '' };
+
+  const [open, setOpen] = useState(location.state?.error || false);
+
+  const handleClose = (
+    event: React.SyntheticEvent<any, Event> | Event,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const onSubmit = useCallback(
     (values: { username: string; password: string }, formik: any) => {
@@ -28,10 +42,10 @@ function LoginForm() {
   const validationSchema = useMemo(
     () =>
       yup.object().shape({
-        username: yup.string().required('Requierd'),
+        username: yup.string().required('Required'),
         password: yup
           .string()
-          .required('Requierd')
+          .required('Required')
           .min(5, 'Password too short'),
       }),
     [],
@@ -39,6 +53,16 @@ function LoginForm() {
 
   return (
     <div className="background-image">
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert onClose={handleClose} severity="info">
+          You are not logged in.
+        </Alert>
+      </Snackbar>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}

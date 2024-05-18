@@ -3,16 +3,19 @@ import MenuAppBar from '../../app-bar/MenuAppBar';
 import BookItem from '../book-item/BookItem';
 import './BookList.css';
 
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useApi } from '../../api/ApiProvider';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { BooksPageDto } from '../../api/dto/book-page.dto';
 import { ClientResponse } from '../../api/library-client';
 
 function BookList() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const apiClient = useApi();
   const [books, setBooks] = useState<BooksPageDto | null>(null);
   const [page, setPage] = useState(0);
+
   const observer = useRef<IntersectionObserver | null>(null);
   const lastBookElementRef = useCallback(
     (node: HTMLDivElement | null) => {
@@ -50,12 +53,16 @@ function BookList() {
           };
         });
       } else {
-        console.error('Error during fetching books');
+        if (response.statusCode === 401 || response.statusCode === 403) {
+          navigate('/login', { state: { from: location, error: true } });
+        } else {
+          console.error('Failed to fetch books', response.statusCode);
+        }
       }
     };
 
     fetchBooks();
-  }, [apiClient, page]);
+  }, [navigate, location, apiClient, page]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
