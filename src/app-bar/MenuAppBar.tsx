@@ -7,6 +7,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import { keyframes } from '@mui/system';
 
 import BookIcon from '@mui/icons-material/Book';
 import HomeIcon from '@mui/icons-material/Home';
@@ -26,99 +29,174 @@ export default function MenuAppBar() {
     setAnchorEl(null);
   };
 
+  const waveAnimation = keyframes`
+  0%, 20%, 80%, 100% { transform: translateY(0); }
+  40%, 60% { transform: translateY(-10px); }
+`;
+
+  const LibraryText = () => {
+    const letters = 'LIBRARY'.split('');
+
+    return (
+      <Box
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      >
+        {letters.map((letter, index) => (
+          <Box
+            key={index}
+            sx={{
+              backgroundColor: 'black',
+              color: 'white',
+              width: '35px',
+              height: '35px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginX: '2px',
+              animation: `${waveAnimation} 6.1s ease-in-out ${index * 0.7}s infinite`,
+            }}
+          >
+            <Typography sx={{ fontSize: '18px', fontWeight: 'bold' }}>
+              {letter}
+            </Typography>
+          </Box>
+        ))}
+      </Box>
+    );
+  };
+
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" sx={{ backgroundColor: '#f0f0f0' }}>
       <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
+        <Box
+          sx={{
+            display: 'flex',
+            flexGrow: 1,
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+          }}
         >
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Photos
-        </Typography>
-        <div>
-          <Link to="/home">
-            <IconButton color="inherit">
-              <HomeIcon />
-            </IconButton>
-          </Link>
-          <Link to="/books">
-            <IconButton color="inherit">
-              <BookIcon />
-            </IconButton>
-          </Link>
           <IconButton
             size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleMenu}
-            color="inherit"
+            edge="start"
+            aria-label="menu"
+            sx={{ mr: 2, color: 'black' }}
           >
-            <AccountCircle />
+            <MenuIcon sx={{ fontSize: '35px' }} />
           </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ color: 'black', fontWeight: 'bold' }}
           >
-            <MenuItem
-              onClick={() => {
-                handleClose();
-                navigate('/profile');
-              }}
+            Photos
+          </Typography>
+        </Box>
+        <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center' }}>
+          <LibraryText />
+        </Box>
+        <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'flex-end' }}>
+          <div>
+            <Link to="/home">
+              <Button
+                startIcon={<HomeIcon />}
+                sx={{
+                  color: 'white',
+                  backgroundColor: 'black',
+                  paddingX: 2,
+                  marginRight: 2,
+                  '&:hover': {
+                    backgroundColor: '#333',
+                  },
+                }}
+              >
+                Home
+              </Button>
+            </Link>
+            <Link to="/books">
+              <Button
+                startIcon={<BookIcon />}
+                sx={{
+                  color: 'white',
+                  backgroundColor: 'black',
+                  paddingX: 2,
+                  marginRight: 2,
+                  '&:hover': {
+                    backgroundColor: '#333',
+                  },
+                }}
+              >
+                Books
+              </Button>
+            </Link>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              sx={{ color: 'black' }}
             >
-              My Profile
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                handleClose();
-                navigate('/my_reviews');
+              <AccountCircle sx={{ fontSize: '40px' }} />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
               }}
-            >
-              My Reviews
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                handleClose();
-                navigate('/my_loans');
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
               }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
             >
-              My Loans
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                handleClose();
-                navigate('/help');
-              }}
-            >
-              Help
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                handleClose();
-                navigate('/login');
-              }}
-            >
-              Sign Out
-            </MenuItem>
-          </Menu>
-        </div>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  navigate('/profile');
+                }}
+              >
+                My Profile
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  navigate('/my_reviews');
+                }}
+              >
+                My Reviews
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  navigate('/my_loans');
+                }}
+              >
+                My Loans
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  navigate('/help');
+                }}
+              >
+                Help
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  navigate('/login');
+                }}
+              >
+                Sign Out
+              </MenuItem>
+            </Menu>
+          </div>
+        </Box>
       </Toolbar>
     </AppBar>
   );
