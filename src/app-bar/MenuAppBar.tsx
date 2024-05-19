@@ -173,10 +173,10 @@ export default function MenuAppBar() {
               <MenuItem
                 onClick={() => {
                   handleClose();
-                  navigate('/my_loans');
+                  navigate('/my_books');
                 }}
               >
-                My Loans
+                My Books
               </MenuItem>
               <MenuItem
                 onClick={() => {

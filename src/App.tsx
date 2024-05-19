@@ -6,8 +6,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ProfilePage from './profle-page/ProfilePage';
 import HelpPage from './help-page/HelpPage';
 import MyReviews from './my_reviews/MyReviews';
-import MyLoans from './my-loans/my-loans-page/MyLoansPage';
-import AddBookReviewPage from './my-loans/add-book-review-page/AddBookReviewPage';
+import MyLoans from './my-books/my-loans-page/MyLoansPage';
+import AddBookReviewPage from './my-books/add-book-review-page/AddBookReviewPage';
 import ApiProvider from './api/ApiProvider';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/help" element={<HelpPage />} />
           <Route path="/my_reviews" element={<MyReviews />} />
-          <Route path="/my_loans" element={<MyLoans />} />
+          <Route path="/my_books" element={<MyLoans />} />
           <Route path="/bookDetail/:bookId" element={<BookDetails />} />
           <Route
             path="/addBookReview/:bookId"
