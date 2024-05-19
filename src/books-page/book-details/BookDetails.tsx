@@ -15,7 +15,7 @@ import { Rating } from '@mui/material';
 import MenuAppBar from '../../app-bar/MenuAppBar';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useApi } from '../../api/ApiProvider';
-import { GetBookDetailsDto } from '../../api/dto/book-details.dto';
+import { BookDetailsDto } from '../../api/dto/book.dto';
 import { ClientResponse } from '../../api/library-client';
 import { ReviewsPageDto } from '../../api/dto/review.dto';
 
@@ -24,9 +24,7 @@ function BookDetails() {
   const location = useLocation();
   const navigate = useNavigate();
   const { bookId } = useParams();
-  const [bookDetails, setBookDetails] = useState<GetBookDetailsDto | null>(
-    null,
-  );
+  const [bookDetails, setBookDetails] = useState<BookDetailsDto | null>(null);
   const [reviews, setReviews] = useState<ReviewsPageDto | null>(null);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -48,7 +46,7 @@ function BookDetails() {
   useEffect(() => {
     apiClient
       .getBookDetails(Number(bookId))
-      .then((response: ClientResponse<GetBookDetailsDto | null>) => {
+      .then((response: ClientResponse<BookDetailsDto | null>) => {
         if (response.success) {
           setBookDetails(response.data);
         } else {

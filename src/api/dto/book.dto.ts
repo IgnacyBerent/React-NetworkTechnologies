@@ -14,3 +14,18 @@ export class BooksPageDto {
   totalItems!: number;
   hasMore!: boolean;
 }
+
+export class BookDetailsDto {
+  id!: number;
+  img!: string;
+  title!: string;
+  author!: string;
+  isbn!: string;
+  publicationYear!: number;
+  publisher!: string;
+  rating!: number;
+  ratingCount!: number;
+  genre!: string;
+  summary!: string;
+  availableCopies!: number;
+}

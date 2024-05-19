@@ -6,7 +6,7 @@ import './BookList.css';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useApi } from '../../api/ApiProvider';
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { BooksPageDto } from '../../api/dto/book-page.dto';
+import { BooksPageDto } from '../../api/dto/book.dto';
 import { ClientResponse } from '../../api/library-client';
 
 function BookList() {
