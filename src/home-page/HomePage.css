@@ -18,13 +18,13 @@ body {
   background-color: #222222;
   height: 2px;
   margin-left: 5em;
-  margin-right: 5em;
+  margin-right: 15em;
+  width: 90%;
 }
 
 .mainBoxContainer {
   margin-top: 80px;
   align-content: center;
-  margin-left: 2em;
   padding-bottom: 80px;
 }
 
@@ -40,12 +40,6 @@ body {
   display: flex;
   justify-content: center;
   padding: 10px;
-}
-
-.description {
-  margin: 2em 5em 2em 5em;
-  font-size: 20px;
-  font-family: 'Karla', sans-serif;
 }
 
 .title {

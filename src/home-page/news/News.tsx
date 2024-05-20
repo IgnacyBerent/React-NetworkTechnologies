@@ -24,7 +24,14 @@ const News = () => {
     <div>
       {newsItems.map((item, index) => (
         <div className="mainContainer">
-          <a href={item.link} key={index} style={{ textDecoration: 'none' }}>
+          <a
+            href={`https://www.${item.link}`}
+            key={index}
+            style={{ textDecoration: 'none' }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {' '}
             <Grid container>
               <Grid item xs={8}>
                 <Box>

@@ -3,6 +3,7 @@ import MenuAppBar from '../app-bar/MenuAppBar';
 import { Link, Outlet } from 'react-router-dom';
 import './HomePage.css';
 import News from './news/News';
+import FunFact from './FunFact';
 
 function HomePage() {
   return (
@@ -104,25 +105,31 @@ function HomePage() {
           Fun Facts
         </Typography>
         <hr className="hr2" />
-        <p className="description">
-          Reading is a great way to relax and learn new things. It can improve
+        <FunFact
+          fact="Reading is a great way to relax and learn new things. It can improve
           your memory and concentration, and it can even reduce stress.
           According to a study by the University of Sussex, reading can reduce
           stress by up to 68%. It's a more effective stress reduction method
-          than listening to music or going for a walk.
-        </p>
-        <p className="description">
-          Did you know that reading can actually increase your lifespan? A study
+          than listening to music or going for a walk."
+          imgSource="https://en.pimg.jp/104/492/694/1/104492694.jpg"
+          imgPosition="left"
+        />
+        <FunFact
+          fact="Did you know that reading can actually increase your lifespan? A study
           conducted by Yale University found that people who read books for 30
           minutes a day lived an average of 23 months longer than non-readers or
-          magazine readers.
-        </p>
-        <p className="description">
-          Reading not only improves your brain's connectivity but also increases
+          magazine readers."
+          imgSource="https://as2.ftcdn.net/v2/jpg/01/70/51/29/1000_F_170512968_msi2C3EhdQWYnX0QruzmWfVjEL6LP482.jpg"
+          imgPosition="right"
+        />
+        <FunFact
+          fact="Reading not only improves your brain's connectivity but also increases
           your emotional intelligence. By reading, you are exposed to a variety
           of emotions and situations that can help you understand and empathize
-          with others better.
-        </p>
+          with others better."
+          imgSource="https://cdn.imt-pm.com/wp-content/uploads/2021/12/online-pdus-pmp-renewal-EI-emotional-intelligence.png"
+          imgPosition="left"
+        />
       </div>
       <Outlet />
     </Box>
