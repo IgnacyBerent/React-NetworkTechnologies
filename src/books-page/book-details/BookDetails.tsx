@@ -1,5 +1,4 @@
 import './BookDetails.css';
-import Review from './review/Review';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import {
@@ -13,12 +12,12 @@ import {
 } from '@mui/material';
 import { Rating } from '@mui/material';
 import MenuAppBar from '../../app-bar/MenuAppBar';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useApi } from '../../api/ApiProvider';
 import { BookDetailsDto } from '../../api/dto/book.dto';
 import { ClientResponse } from '../../api/library-client';
-import { ReviewsPageDto } from '../../api/dto/review.dto';
 import { BookDetailsGrid } from './BookDetailsGrid';
+import Reviews from './Reviews';
 
 function BookDetails() {
   const apiClient = useApi();
@@ -26,23 +25,7 @@ function BookDetails() {
   const navigate = useNavigate();
   const { bookId } = useParams();
   const [bookDetails, setBookDetails] = useState<BookDetailsDto | null>(null);
-  const [reviews, setReviews] = useState<ReviewsPageDto | null>(null);
-  const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(true);
-
-  const observer = useRef<IntersectionObserver | null>(null);
-  const lastReviewElementRef = useCallback(
-    (node: HTMLDivElement | null) => {
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && reviews?.hasMore) {
-          setPage((prevPage) => prevPage + 1);
-        }
-      });
-      if (node) observer.current.observe(node);
-    },
-    [reviews],
-  );
 
   useEffect(() => {
     apiClient
@@ -60,33 +43,6 @@ function BookDetails() {
         setLoading(false);
       });
   }, [navigate, location, apiClient, bookId]);
-
-  useEffect(() => {
-    const fetchReviews = async () => {
-      const response: ClientResponse<ReviewsPageDto | null> =
-        await apiClient.getReviews(Number(bookId), page);
-      if (response.success) {
-        setReviews((prevReviews) => {
-          const newReviews =
-            page > 0
-              ? [...(prevReviews?.reviews || []), ...response.data!.reviews]
-              : response.data!.reviews;
-          return {
-            ...response.data,
-            reviews: newReviews,
-            currentPage: response.data!.currentPage || 0,
-            totalPages: response.data!.totalPages || 0,
-            totalItems: response.data!.totalItems || 0,
-            hasMore: response.data!.hasMore || false,
-          };
-        });
-      } else {
-        console.error('Error during fetching reviews');
-      }
-    };
-
-    fetchReviews();
-  }, [apiClient, bookId, page]);
 
   if (loading || !bookDetails) {
     return <div>Loading...</div>;
@@ -154,21 +110,7 @@ function BookDetails() {
             </Card>
             <div id="commentSection"></div>
           </Grid>
-          {reviews?.reviews.map((review, index) => {
-            if (reviews.reviews.length === index + 1) {
-              return (
-                <Grid item xs={12} key={index} ref={lastReviewElementRef}>
-                  <Review review={review} />
-                </Grid>
-              );
-            } else {
-              return (
-                <Grid item xs={12} key={index}>
-                  <Review review={review} />
-                </Grid>
-              );
-            }
-          })}
+          <Reviews bookId={bookId!} />
         </Grid>
       </Box>
       <Outlet />
