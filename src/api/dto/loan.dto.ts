@@ -5,7 +5,7 @@ export class LoanDto {
   id!: number;
   book!: BookDto;
   user!: UserDto;
-  loanDate!: string;
+  dateOfLoan!: string;
   dueDate!: string;
   returnDate: string | null = null;
 }

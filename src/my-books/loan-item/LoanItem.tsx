@@ -8,6 +8,20 @@ interface LoanItemProps {
   loan: LoanDto;
 }
 
+const buttonStyle = {
+  width: '110px',
+  height: '30px',
+  backgroundColor: 'black',
+  color: 'white',
+  borderRadius: '10px',
+  fontFamily: 'Karla',
+  fontWeight: '900',
+  fontSize: '14px',
+  '&:hover': {
+    backgroundColor: '#333',
+  },
+};
+
 const LoanItem = forwardRef<HTMLDivElement, LoanItemProps>(({ loan }, ref) => {
   const navigate = useNavigate();
 
@@ -20,7 +34,7 @@ const LoanItem = forwardRef<HTMLDivElement, LoanItemProps>(({ loan }, ref) => {
           <p className="author">{loan.book.author}</p>
         </div>
         <div className="dates-container">
-          <p className="date">Loan time: {loan.loanDate}</p>
+          <p className="date">Loan time: {loan.dateOfLoan}</p>
           <p className="date">Due date: {loan.dueDate}</p>
           {loan.returnDate && (
             <p className="date">Return date: {loan.returnDate}</p>
@@ -28,11 +42,11 @@ const LoanItem = forwardRef<HTMLDivElement, LoanItemProps>(({ loan }, ref) => {
         </div>
       </div>
       <div className="buttons-container">
-        {!loan.returnDate && <Button className="button">Extend Loan</Button>}
+        {!loan.returnDate && <Button sx={buttonStyle}>Extend Loan</Button>}
         {!loan.returnDate && (
           <Button
-            className="button"
             onClick={() => navigate(`/addBookReview/${loan.book.id}`)}
+            sx={buttonStyle}
           >
             Return Loan
           </Button>

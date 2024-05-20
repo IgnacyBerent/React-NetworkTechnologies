@@ -18,6 +18,8 @@ import { BookDetailsDto } from '../../api/dto/book.dto';
 import { ClientResponse } from '../../api/library-client';
 import { BookDetailsGrid } from './BookDetailsGrid';
 import Reviews from './Reviews';
+import ReturnDateDialog from './ReturnDateDialog';
+import { CreateLoanDto } from '../../api/dto/loan.dto';
 
 function BookDetails() {
   const apiClient = useApi();
@@ -26,6 +28,53 @@ function BookDetails() {
   const { bookId } = useParams();
   const [bookDetails, setBookDetails] = useState<BookDetailsDto | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const [open, setOpen] = useState(false);
+  const [dueDays, setReturnDate] = useState(14);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleDateChange = (value: number) => {
+    setReturnDate(value);
+  };
+
+  const handleConfirm = async () => {
+    const userResponse = await apiClient.getCurrentUser();
+    if (userResponse.success) {
+      const userId = userResponse.data?.id;
+      if (!userId) {
+        console.error('Failed to get user ID');
+        return;
+      }
+
+      const loanDate = new Date();
+      const dueDate = new Date();
+      dueDate.setDate(loanDate.getDate() + dueDays);
+
+      const loanDto: CreateLoanDto = {
+        userId,
+        bookId: Number(bookId),
+        loanDate: loanDate.toISOString(),
+        dueDate: dueDate.toISOString(),
+      };
+
+      const response = await apiClient.takeLoan(loanDto);
+      if (response.success) {
+        navigate('/my-books');
+        console.log('Loan successful');
+      } else {
+        console.error('Loan failed', response.statusCode);
+      }
+
+      handleClose();
+    }
+  };
 
   useEffect(() => {
     apiClient
@@ -94,6 +143,7 @@ function BookDetails() {
                 <hr />
                 <BookDetailsGrid bookDetails={bookDetails} />
                 <Button
+                  onClick={handleClickOpen}
                   className="wide-button"
                   variant="contained"
                   sx={{
@@ -106,6 +156,12 @@ function BookDetails() {
                 >
                   BORROW BOOK
                 </Button>
+                <ReturnDateDialog
+                  open={open}
+                  handleClose={handleClose}
+                  handleConfirm={handleConfirm}
+                  handleDateChange={handleDateChange}
+                />
               </CardContent>
             </Card>
             <div id="commentSection"></div>
