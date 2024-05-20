@@ -8,6 +8,7 @@ body {
   display: block;
   background-color: #222222;
   height: 1px;
+  margin: 0;
 }
 
 .hr2 {
