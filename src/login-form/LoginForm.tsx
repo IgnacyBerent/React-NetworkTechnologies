@@ -74,6 +74,7 @@ function LoginForm() {
           <div className="login-form-container">
             <h1>WELCOME IN LIBRARY</h1>
             <h2>PLEASE LOGIN</h2>
+            <hr />
             <form
               className="login-form"
               id="signForm"
@@ -110,12 +111,17 @@ function LoginForm() {
                 type="submit"
                 form="signForm"
                 disabled={!(formik.isValid && formik.dirty)}
-                sx={{ marginTop: '1rem' }}
+                sx={{
+                  backgroundColor: 'black',
+                  marginTop: '1rem',
+                  '&:hover': {
+                    backgroundColor: '#333',
+                  },
+                }}
               >
                 Login
               </Button>
             </form>
-            <button className="create-account-button">CREATE AN ACCOUNT</button>
           </div>
         )}
       </Formik>

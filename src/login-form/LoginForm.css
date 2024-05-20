@@ -23,7 +23,7 @@
 .login-form-container {
   position: relative;
   background-color: rgba(247, 247, 247);
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,14 +41,14 @@
 }
 
 .login-form-container h2 {
-  margin-bottom: 3rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
   font-size: 25px;
   color: #333;
   font-weight: 800;
 }
 
 .login-form {
-  padding: 10px;
   display: flex;
   gap: 2rem;
   flex-direction: column;
@@ -74,4 +74,10 @@
 /* Add this to your CSS */
 .error-message {
   height: 40px; /* Adjust as needed */
+}
+
+hr {
+  width: 100%;
+  margin: 1rem 0 4rem 0;
+  border: 1px solid #333;
 }
