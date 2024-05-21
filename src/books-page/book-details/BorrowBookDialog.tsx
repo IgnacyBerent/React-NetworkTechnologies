@@ -6,22 +6,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
-
-const menuItemStyle = {
-  fontSize: '1.2rem',
-  fontWeight: '600',
-  fontFamily: 'Karla',
-};
-
-const buttonStyle = {
-  color: 'black',
-  fontWeight: '700',
-  fontFamily: 'Karla',
-  fontSize: '1.2rem',
-  '&:hover': {
-    backgroundColor: '#333',
-  },
-};
+import {
+  dialogTitleStyle,
+  dialogTextStyle,
+  menuItemStyle,
+} from '../../styles/textStyles';
+import { dialogButtonStyle } from '../../styles/buttonStyles';
 
 interface ReturnDateDialogProps {
   open: boolean;
@@ -30,7 +20,7 @@ interface ReturnDateDialogProps {
   handleDateChange: (value: number) => void;
 }
 
-const ReturnDateDialog: React.FC<ReturnDateDialogProps> = ({
+const BorrowBookDialog: React.FC<ReturnDateDialogProps> = ({
   open,
   handleClose,
   handleConfirm,
@@ -38,27 +28,9 @@ const ReturnDateDialog: React.FC<ReturnDateDialogProps> = ({
 }) => {
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle
-        sx={{
-          fontSize: '1.8rem',
-          fontWeight: '900',
-          fontFamily: 'Lato',
-          marginBottom: '0rem',
-          paddingBottom: '0rem',
-        }}
-      >
-        Choose Return Date
-      </DialogTitle>
+      <DialogTitle sx={dialogTitleStyle}>Choose Return Date</DialogTitle>
       <DialogContent>
-        <DialogContentText
-          sx={{
-            fontSize: '1.2rem',
-            fontWeight: '700',
-            fontFamily: 'Karla',
-            marginTop: '0rem',
-            marginBottom: '1rem',
-          }}
-        >
+        <DialogContentText sx={dialogTextStyle}>
           Please select the return date for the book.
         </DialogContentText>
         <Select
@@ -83,10 +55,10 @@ const ReturnDateDialog: React.FC<ReturnDateDialogProps> = ({
         </Select>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} sx={buttonStyle}>
+        <Button onClick={handleClose} sx={dialogButtonStyle}>
           Cancel
         </Button>
-        <Button onClick={handleConfirm} sx={buttonStyle}>
+        <Button onClick={handleConfirm} sx={dialogButtonStyle}>
           Confirm
         </Button>
       </DialogActions>
@@ -94,4 +66,4 @@ const ReturnDateDialog: React.FC<ReturnDateDialogProps> = ({
   );
 };
 
-export default ReturnDateDialog;
+export default BorrowBookDialog;
