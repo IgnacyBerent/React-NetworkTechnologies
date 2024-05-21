@@ -80,6 +80,7 @@ const News = () => {
                 </Box>
               </Grid>
             </Grid>
+            <div style={{ height: 15 }} />
             <hr />
           </a>
         </div>

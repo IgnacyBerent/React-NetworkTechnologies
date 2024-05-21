@@ -19,3 +19,9 @@ export const dialogTextStyle = {
   marginTop: '0rem',
   marginBottom: '1rem',
 };
+
+export const desciptionTextStyle = {
+  fontSize: '16px',
+  fontWeight: '600',
+  fontFamily: 'Karla',
+};

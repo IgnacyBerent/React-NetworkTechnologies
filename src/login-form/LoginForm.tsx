@@ -6,6 +6,7 @@ import { useCallback, useMemo, useState } from 'react';
 import * as yup from 'yup';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useApi } from '../api/ApiProvider';
+import { mainButtonStyle } from '../styles/buttonStyles';
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -74,7 +75,9 @@ function LoginForm() {
           <div className="login-form-container">
             <h1>WELCOME IN LIBRARY</h1>
             <h2>PLEASE LOGIN</h2>
+            <div style={{ height: 20 }} />
             <hr />
+            <div style={{ height: 60 }} />
             <form
               className="login-form"
               id="signForm"
@@ -104,6 +107,7 @@ function LoginForm() {
                 error={formik.touched.password && !!formik.errors.password}
                 helperText={formik.touched.password && formik.errors.password}
               />
+              <div style={{ height: 20 }} />
               <Button
                 className="login-button"
                 variant="contained"
@@ -111,13 +115,7 @@ function LoginForm() {
                 type="submit"
                 form="signForm"
                 disabled={!(formik.isValid && formik.dirty)}
-                sx={{
-                  backgroundColor: 'black',
-                  marginTop: '1rem',
-                  '&:hover': {
-                    backgroundColor: '#333',
-                  },
-                }}
+                sx={mainButtonStyle}
               >
                 Login
               </Button>

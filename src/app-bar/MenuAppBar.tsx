@@ -15,6 +15,7 @@ import BookIcon from '@mui/icons-material/Book';
 import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { mainButtonStyle } from '../styles/buttonStyles';
 
 export default function MenuAppBar() {
   const navigate = useNavigate();
@@ -101,13 +102,9 @@ export default function MenuAppBar() {
               <Button
                 startIcon={<HomeIcon />}
                 sx={{
-                  color: 'white',
-                  backgroundColor: 'black',
+                  ...mainButtonStyle,
                   paddingX: 2,
                   marginRight: 2,
-                  '&:hover': {
-                    backgroundColor: '#333',
-                  },
                 }}
               >
                 Home
@@ -117,13 +114,9 @@ export default function MenuAppBar() {
               <Button
                 startIcon={<BookIcon />}
                 sx={{
-                  color: 'white',
-                  backgroundColor: 'black',
+                  ...mainButtonStyle,
                   paddingX: 2,
                   marginRight: 2,
-                  '&:hover': {
-                    backgroundColor: '#333',
-                  },
                 }}
               >
                 Books

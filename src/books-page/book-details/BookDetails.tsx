@@ -20,6 +20,8 @@ import { BookDetailsGrid } from './BookDetailsGrid';
 import Reviews from './Reviews';
 import BorrowBookDialog from './BorrowBookDialog';
 import { CreateLoanDto } from '../../api/dto/loan.dto';
+import { desciptionTextStyle } from '../../styles/textStyles';
+import { mainButtonStyle } from '../../styles/buttonStyles';
 
 function BookDetails() {
   const apiClient = useApi();
@@ -97,6 +99,8 @@ function BookDetails() {
     return <div>Loading...</div>;
   }
 
+  const SizedBox = () => <div style={{ height: 20 }} />;
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <MenuAppBar />
@@ -136,23 +140,21 @@ function BookDetails() {
                     )
                   </a>
                 </div>
+                <SizedBox />
                 <hr />
-                <Typography variant="body2" className="book-summary">
+                <SizedBox />
+                <Typography sx={desciptionTextStyle}>
                   {bookDetails.summary}
                 </Typography>
+                <SizedBox />
                 <hr />
+                <SizedBox />
                 <BookDetailsGrid bookDetails={bookDetails} />
                 <Button
                   onClick={handleClickOpen}
                   className="wide-button"
                   variant="contained"
-                  sx={{
-                    color: 'white',
-                    backgroundColor: 'black',
-                    '&:hover': {
-                      backgroundColor: '#333',
-                    },
-                  }}
+                  sx={mainButtonStyle}
                 >
                   BORROW BOOK
                 </Button>

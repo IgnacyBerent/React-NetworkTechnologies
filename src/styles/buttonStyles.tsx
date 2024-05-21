@@ -7,3 +7,11 @@ export const dialogButtonStyle = {
     backgroundColor: '#333',
   },
 };
+
+export const mainButtonStyle = {
+  color: 'white',
+  backgroundColor: 'black',
+  '&:hover': {
+    backgroundColor: '#333',
+  },
+};
