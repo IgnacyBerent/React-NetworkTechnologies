@@ -9,7 +9,6 @@ import { useState, forwardRef } from 'react';
 import './LoanItem.css';
 import { LoanDto } from '../../api/dto/loan.dto';
 import AddReviewDialog from './AddReviewDialog';
-import { useApi } from '../../api/ApiProvider';
 
 interface LoanItemProps {
   loan: LoanDto;
