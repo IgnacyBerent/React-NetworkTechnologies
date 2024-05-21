@@ -1,8 +1,15 @@
-import { Button } from '@mui/material';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from '@mui/material';
+import { useState, forwardRef } from 'react';
 import './LoanItem.css';
-import { useNavigate } from 'react-router-dom';
 import { LoanDto } from '../../api/dto/loan.dto';
-import { forwardRef } from 'react';
+import AddReviewDialog from './AddReviewDialog';
+import { useApi } from '../../api/ApiProvider';
 
 interface LoanItemProps {
   loan: LoanDto;
@@ -23,7 +30,15 @@ const buttonStyle = {
 };
 
 const LoanItem = forwardRef<HTMLDivElement, LoanItemProps>(({ loan }, ref) => {
-  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div className="container" ref={ref}>
@@ -45,12 +60,27 @@ const LoanItem = forwardRef<HTMLDivElement, LoanItemProps>(({ loan }, ref) => {
         {!loan.returnDate && <Button sx={buttonStyle}>Extend Loan</Button>}
         {!loan.returnDate && (
           <Button
-            onClick={() => navigate(`/addBookReview/${loan.book.id}`)}
+            onClick={handleOpen} // open the dialog when the button is clicked
             sx={buttonStyle}
           >
-            Return Loan
+            Return Book
           </Button>
-        )}{' '}
+        )}
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Return Book</DialogTitle>
+          <DialogContent>
+            <AddReviewDialog
+              onClose={handleClose}
+              open={open}
+              loanId={loan.id}
+              bookId={loan.book.id}
+              userId={loan.user.id}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Close</Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </div>
   );

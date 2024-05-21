@@ -165,14 +165,6 @@ export default function MenuAppBar() {
               <MenuItem
                 onClick={() => {
                   handleClose();
-                  navigate('/my_reviews');
-                }}
-              >
-                My Reviews
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleClose();
                   navigate('/my_books');
                 }}
               >

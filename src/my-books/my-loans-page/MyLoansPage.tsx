@@ -64,7 +64,14 @@ function MyLoans() {
           console.error('Failed to fetch user ID');
         }
       } else {
-        console.error(`Failed to fetch user: ${userResponse.statusCode}`);
+        if (
+          userResponse.statusCode === 401 ||
+          userResponse.statusCode === 403
+        ) {
+          navigate('/login', { state: { from: location, error: true } });
+        } else {
+          console.error(`Failed to fetch user: ${userResponse.statusCode}`);
+        }
       }
     };
 

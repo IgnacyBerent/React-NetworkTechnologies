@@ -1,7 +1,11 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { LoginDto, LoginResponseDto } from './dto/login.dto';
 import { BooksPageDto, BookDetailsDto } from './dto/book.dto';
-import { ReviewsPageDto } from './dto/review.dto';
+import {
+  AddReviewDto,
+  CreateReviewResponseDto,
+  ReviewsPageDto,
+} from './dto/review.dto';
 import { NewsDto } from './dto/news.dto';
 import {
   CreateLoanDto,
@@ -131,6 +135,29 @@ export class LibraryClient {
     }
   }
 
+  public async addReview(
+    data: AddReviewDto,
+  ): Promise<ClientResponse<CreateReviewResponseDto | null>> {
+    try {
+      const response: AxiosResponse<null> = await this.client.post(
+        'reviews/add',
+        data,
+      );
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      return {
+        success: false,
+        data: null,
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
+  }
+
   public async getNews(): Promise<ClientResponse<NewsDto[] | null>> {
     try {
       const response: AxiosResponse<NewsDto[]> =
@@ -203,7 +230,7 @@ export class LibraryClient {
 
   public async returnLoan(loanId: number): Promise<ClientResponse<null>> {
     try {
-      const response: AxiosResponse<null> = await this.client.post(
+      const response: AxiosResponse<null> = await this.client.put(
         `loans/return/${loanId}`,
       );
       return {
