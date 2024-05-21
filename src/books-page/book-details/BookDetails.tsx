@@ -18,7 +18,7 @@ import { BookDetailsDto } from '../../api/dto/book.dto';
 import { ClientResponse } from '../../api/library-client';
 import { BookDetailsGrid } from './BookDetailsGrid';
 import Reviews from './Reviews';
-import ReturnDateDialog from './ReturnDateDialog';
+import BorrowBookDialog from './BorrowBookDialog';
 import { CreateLoanDto } from '../../api/dto/loan.dto';
 
 function BookDetails() {
@@ -156,7 +156,7 @@ function BookDetails() {
                 >
                   BORROW BOOK
                 </Button>
-                <ReturnDateDialog
+                <BorrowBookDialog
                   open={open}
                   handleClose={handleClose}
                   handleConfirm={handleConfirm}
