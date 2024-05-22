@@ -1,4 +1,10 @@
-import { Box, Grid } from '@mui/material';
+import {
+  Box,
+  Grid,
+  IconButton,
+  InputAdornment,
+  TextField,
+} from '@mui/material';
 import MenuAppBar from '../../app-bar/MenuAppBar';
 import BookItem from '../book-item/BookItem';
 
@@ -7,6 +13,7 @@ import { useApi } from '../../api/ApiProvider';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { BooksPageDto } from '../../api/dto/book.dto';
 import { ClientResponse } from '../../api/library-client';
+import SearchIcon from '@mui/icons-material/Search';
 
 function BookList() {
   const location = useLocation();
@@ -14,8 +21,9 @@ function BookList() {
   const apiClient = useApi();
   const [books, setBooks] = useState<BooksPageDto | null>(null);
   const [page, setPage] = useState(0);
-
+  const [searchTerm, setSearchTerm] = useState<string | null>(null);
   const observer = useRef<IntersectionObserver | null>(null);
+
   const lastBookElementRef = useCallback(
     (node: HTMLDivElement | null) => {
       if (observer.current) observer.current.disconnect();
@@ -32,7 +40,7 @@ function BookList() {
   useEffect(() => {
     const fetchBooks = async () => {
       const response: ClientResponse<BooksPageDto | null> =
-        await apiClient.getBooks(page);
+        await apiClient.getBooks(page, searchTerm);
       if (response.success) {
         const availableBooks = response.data!.books.filter(
           (book) => !book.isAvailable,
@@ -61,17 +69,43 @@ function BookList() {
     };
 
     fetchBooks();
-  }, [navigate, location, apiClient, page]);
+  }, [navigate, location, apiClient, page, searchTerm]);
+
+  const handleSearch = () => {
+    setPage(0);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <MenuAppBar />
       <Box>
+        <TextField
+          label="Search by title"
+          variant="outlined"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={handleKeyDown}
+          sx={{ width: '40%', marginTop: '120px', marginLeft: '10%' }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={handleSearch}>
+                  <SearchIcon />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
         <Grid
           container
           spacing={2}
           sx={{
-            marginTop: '20px',
             paddingRight: '5rem',
             paddingLeft: '5rem',
             paddingTop: '5rem',

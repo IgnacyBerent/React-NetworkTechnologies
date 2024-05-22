@@ -101,6 +101,7 @@ export class LibraryClient {
 
   public async getBooks(
     page: number = 0,
+    searchTerm: string | null = null,
   ): Promise<ClientResponse<BooksPageDto | null>> {
     try {
       const response: AxiosResponse<BooksPageDto> = await this.client.get(
@@ -109,6 +110,7 @@ export class LibraryClient {
           params: {
             page: page,
             size: 8,
+            searchTerm: searchTerm,
           },
         },
       );
