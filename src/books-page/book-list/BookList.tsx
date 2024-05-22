@@ -1,7 +1,6 @@
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import MenuAppBar from '../../app-bar/MenuAppBar';
 import BookItem from '../book-item/BookItem';
-import './BookList.css';
 
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useApi } from '../../api/ApiProvider';
@@ -68,34 +67,45 @@ function BookList() {
     <Box sx={{ flexGrow: 1 }}>
       <MenuAppBar />
       <Box>
-        <div className="book-list">
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            marginTop: '20px',
+            paddingRight: '5rem',
+            paddingLeft: '5rem',
+            paddingTop: '5rem',
+          }}
+        >
           {books?.books.map((book, index) => {
             if (books.books.length === index + 1) {
               return (
-                <BookItem
-                  ref={lastBookElementRef}
-                  key={index}
-                  id={book.id}
-                  img={book.img}
-                  title={book.title}
-                  author={book.author}
-                  rating={book.rating}
-                />
+                <Grid item xs={12} sm={6} md={3} key={index}>
+                  <BookItem
+                    ref={lastBookElementRef}
+                    id={book.id}
+                    img={book.img}
+                    title={book.title}
+                    author={book.author}
+                    rating={book.rating}
+                  />
+                </Grid>
               );
             } else {
               return (
-                <BookItem
-                  key={index}
-                  id={book.id}
-                  img={book.img}
-                  title={book.title}
-                  author={book.author}
-                  rating={book.rating}
-                />
+                <Grid item xs={12} sm={6} md={3} key={index}>
+                  <BookItem
+                    id={book.id}
+                    img={book.img}
+                    title={book.title}
+                    author={book.author}
+                    rating={book.rating}
+                  />
+                </Grid>
               );
             }
           })}
-        </div>
+        </Grid>
       </Box>
       <Outlet />
     </Box>
