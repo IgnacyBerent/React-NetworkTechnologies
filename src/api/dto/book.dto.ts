@@ -29,3 +29,20 @@ export class BookDetailsDto {
   summary!: string;
   availableCopies!: number;
 }
+
+export class AddBookDto {
+  img!: string;
+  isbn!: string;
+  title!: string;
+  author!: string;
+  publisher!: string;
+  publicationYear!: number;
+  availableCopies!: number;
+  genre!: string;
+  summary!: string;
+}
+
+export class AddBookResponseDto {
+  id!: number;
+  copies!: number;
+}

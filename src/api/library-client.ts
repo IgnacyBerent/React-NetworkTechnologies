@@ -1,6 +1,11 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { LoginDto, LoginResponseDto } from './dto/login.dto';
-import { BooksPageDto, BookDetailsDto } from './dto/book.dto';
+import {
+  BooksPageDto,
+  BookDetailsDto,
+  AddBookDto,
+  AddBookResponseDto,
+} from './dto/book.dto';
 import {
   AddReviewDto,
   CreateReviewResponseDto,
@@ -159,6 +164,27 @@ export class LibraryClient {
       return {
         success: false,
         data: null,
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
+  }
+
+  public async addBook(
+    data: AddBookDto,
+  ): Promise<ClientResponse<AddBookResponseDto>> {
+    try {
+      const response: AxiosResponse<AddBookResponseDto> =
+        await this.client.post('books/add', data);
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      return {
+        success: false,
+        data: { id: 0, copies: 0 },
         statusCode: axiosError.response?.status || 0,
       };
     }
