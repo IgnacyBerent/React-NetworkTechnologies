@@ -3,9 +3,10 @@ import { Formik, Field, Form, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { Box, Typography, Stack, TextField, Button } from '@mui/material';
 import { useApi } from '../api/ApiProvider';
-import MenuAppBar from '../app-bar/MenuAppBar';
+import MenuAppBar from '../navigation/MenuAppBar';
 import { mainButtonStyle } from '../styles/buttonStyles';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../navigation/Footer';
 
 interface UserFormValues {
   password: string;
@@ -135,6 +136,7 @@ const AddUser = () => {
         )}
       </Formik>
       <div style={{ height: '80px' }}></div>
+      <Footer />
     </Box>
   );
 };

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 import { UserDto } from '../../api/dto/user.dto';
 import { useApi } from '../../api/ApiProvider';
-import MenuAppBar from '../../app-bar/MenuAppBar';
+import MenuAppBar from '../../navigation/MenuAppBar';
 import UserItem from './UserItem';
+import Footer from '../../navigation/Footer';
 
 function Users() {
   const [users, setUsers] = useState<UserDto[]>([]);
@@ -34,6 +35,8 @@ function Users() {
       {users.map((user) => (
         <UserItem key={user.id} user={user} deleteUser={deleteUser} />
       ))}
+      <div style={{ height: '80px' }}></div>
+      <Footer />
     </div>
   );
 }

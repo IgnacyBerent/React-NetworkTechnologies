@@ -11,7 +11,7 @@ import {
   Box,
 } from '@mui/material';
 import { Rating } from '@mui/material';
-import MenuAppBar from '../../app-bar/MenuAppBar';
+import MenuAppBar from '../../navigation/MenuAppBar';
 import { useEffect, useState } from 'react';
 import { useApi } from '../../api/ApiProvider';
 import { BookDetailsDto } from '../../api/dto/book.dto';
@@ -22,6 +22,7 @@ import BorrowBookDialog from './BorrowBookDialog';
 import { CreateLoanDto } from '../../api/dto/loan.dto';
 import { desciptionTextStyle } from '../../styles/textStyles';
 import { mainButtonStyle } from '../../styles/buttonStyles';
+import Footer from '../../navigation/Footer';
 
 function BookDetails() {
   const apiClient = useApi();
@@ -171,6 +172,7 @@ function BookDetails() {
           <Reviews bookId={bookId!} />
         </Grid>
       </Box>
+      <Footer />
       <Outlet />
     </Box>
   );

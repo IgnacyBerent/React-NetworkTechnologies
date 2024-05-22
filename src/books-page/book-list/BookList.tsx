@@ -5,7 +5,7 @@ import {
   InputAdornment,
   TextField,
 } from '@mui/material';
-import MenuAppBar from '../../app-bar/MenuAppBar';
+import MenuAppBar from '../../navigation/MenuAppBar';
 import BookItem from '../book-item/BookItem';
 
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
@@ -14,6 +14,7 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { BooksPageDto } from '../../api/dto/book.dto';
 import { ClientResponse } from '../../api/library-client';
 import SearchIcon from '@mui/icons-material/Search';
+import Footer from '../../navigation/Footer';
 
 function BookList() {
   const location = useLocation();
@@ -141,6 +142,7 @@ function BookList() {
           })}
         </Grid>
       </Box>
+      <Footer />
       <Outlet />
     </Box>
   );

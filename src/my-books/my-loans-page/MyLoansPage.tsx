@@ -2,12 +2,13 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import './MyLoansPage.css';
 
 import { Box } from '@mui/material';
-import MenuAppBar from '../../app-bar/MenuAppBar';
+import MenuAppBar from '../../navigation/MenuAppBar';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import LoanItem from '../loan-item/LoanItem';
 import { useApi } from '../../api/ApiProvider';
 import { LoanPageDto } from '../../api/dto/loan.dto';
 import { ClientResponse } from '../../api/library-client';
+import Footer from '../../navigation/Footer';
 
 function MyLoans() {
   const location = useLocation();
@@ -94,7 +95,9 @@ function MyLoans() {
           })}
         </div>
       </Box>
+      <div style={{ height: '80px' }}></div>
       <Outlet />
+      <Footer />
     </Box>
   );
 }

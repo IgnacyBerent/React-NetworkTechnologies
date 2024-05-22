@@ -1,9 +1,10 @@
 import { Box, Button, Typography } from '@mui/material';
-import MenuAppBar from '../app-bar/MenuAppBar';
+import MenuAppBar from '../navigation/MenuAppBar';
 import { Link, Outlet } from 'react-router-dom';
 import './HomePage.css';
 import News from './news/News';
 import FunFact from './FunFact';
+import Footer from '../navigation/Footer';
 
 function HomePage() {
   return (
@@ -131,6 +132,7 @@ function HomePage() {
           imgPosition="left"
         />
       </div>
+      <Footer />
       <Outlet />
     </Box>
   );
