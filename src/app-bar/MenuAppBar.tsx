@@ -159,14 +159,6 @@ export default function MenuAppBar() {
               <MenuItem
                 onClick={() => {
                   handleClose();
-                  navigate('/profile');
-                }}
-              >
-                My Profile
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleClose();
                   navigate('/my_books');
                 }}
               >
