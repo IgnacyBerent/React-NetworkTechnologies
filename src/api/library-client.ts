@@ -89,6 +89,11 @@ export class LibraryClient {
     }
   }
 
+  public signOut(): void {
+    this.cookies.remove('token');
+    this.client.defaults.headers.common['Authorization'] = '';
+  }
+
   public async getBooks(
     page: number = 0,
   ): Promise<ClientResponse<BooksPageDto | null>> {

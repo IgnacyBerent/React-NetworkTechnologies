@@ -16,9 +16,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { mainButtonStyle } from '../styles/buttonStyles';
+import { useApi } from '../api/ApiProvider';
 
 export default function MenuAppBar() {
   const navigate = useNavigate();
+  const apiClient = useApi();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -174,6 +176,7 @@ export default function MenuAppBar() {
               <MenuItem
                 onClick={() => {
                   handleClose();
+                  apiClient.signOut();
                   navigate('/login');
                 }}
               >
