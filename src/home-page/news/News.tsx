@@ -25,7 +25,7 @@ const News = () => {
       }
     };
     fetchNews();
-  }, [apiClient]);
+  }, [apiClient, location, navigate]);
 
   return (
     <div>
