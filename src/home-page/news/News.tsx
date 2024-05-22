@@ -3,8 +3,11 @@ import { useApi } from '../../api/ApiProvider';
 import { NewsDto } from '../../api/dto/news.dto';
 import './News.css';
 import { Grid, Box, Typography } from '@mui/material';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const News = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const apiClient = useApi();
   const [newsItems, setNewsItems] = useState<NewsDto[]>([]);
 
@@ -14,7 +17,11 @@ const News = () => {
       if (response.success) {
         setNewsItems(response.data!);
       } else {
-        console.error('Failed to fetch news', response.statusCode);
+        if (response.statusCode === 401 || response.statusCode === 403) {
+          navigate('/login', { state: { from: location, error: true } });
+        } else {
+          console.error('Failed to fetch news', response.statusCode);
+        }
       }
     };
     fetchNews();
