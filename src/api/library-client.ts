@@ -20,6 +20,7 @@ import {
 import { UserDto } from './dto/user.dto';
 import Cookies from 'universal-cookie';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
+import { RegisterDto, RegisterResponseDto } from './dto/register.dto';
 
 export type ClientResponse<T> = {
   success: boolean;
@@ -97,6 +98,67 @@ export class LibraryClient {
   public signOut(): void {
     this.cookies.remove('token');
     this.client.defaults.headers.common['Authorization'] = '';
+  }
+
+  public async register(
+    data: RegisterDto,
+  ): Promise<ClientResponse<RegisterResponseDto | null>> {
+    try {
+      const response: AxiosResponse<RegisterResponseDto> =
+        await this.client.post('auth/register', data);
+
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      return {
+        success: false,
+        data: null,
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
+  }
+
+  public async getUsers(): Promise<ClientResponse<UserDto[]>> {
+    try {
+      const response: AxiosResponse<UserDto[]> =
+        await this.client.get('user/getAll');
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      return {
+        success: false,
+        data: [],
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
+  }
+
+  public async deleteUser(id: number): Promise<ClientResponse<null>> {
+    try {
+      const response: AxiosResponse<null> = await this.client.delete(
+        `user/delete/${id}`,
+      );
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      return {
+        success: false,
+        data: null,
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
   }
 
   public async getBooks(

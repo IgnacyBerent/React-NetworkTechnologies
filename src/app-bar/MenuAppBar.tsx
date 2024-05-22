@@ -190,6 +190,14 @@ export default function MenuAppBar() {
                   >
                     Add User
                   </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      navigate('/admin/users');
+                    }}
+                  >
+                    Users
+                  </MenuItem>
                 </>
               )}
               <MenuItem

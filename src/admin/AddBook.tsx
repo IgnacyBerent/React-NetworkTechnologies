@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 import * as yup from 'yup';
 import { Box, Typography, Stack, TextField, Button } from '@mui/material';
-import { useApi } from '../../api/ApiProvider';
-import MenuAppBar from '../../app-bar/MenuAppBar';
-import { mainButtonStyle } from '../../styles/buttonStyles';
+import { useApi } from '../api/ApiProvider';
+import MenuAppBar from '../app-bar/MenuAppBar';
+import { mainButtonStyle } from '../styles/buttonStyles';
 import { useNavigate } from 'react-router-dom';
 
 interface BookFormValues {
