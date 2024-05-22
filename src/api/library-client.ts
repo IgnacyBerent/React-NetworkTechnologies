@@ -13,6 +13,8 @@ import {
   LoanPageDto,
 } from './dto/loan.dto';
 import { UserDto } from './dto/user.dto';
+import Cookies from 'universal-cookie';
+import { JwtPayload, jwtDecode } from 'jwt-decode';
 
 export type ClientResponse<T> = {
   success: boolean;
@@ -20,13 +22,37 @@ export type ClientResponse<T> = {
   statusCode: number;
 };
 
+interface MyJwtPayload extends JwtPayload {
+  role?: string;
+}
+
 export class LibraryClient {
   private client: AxiosInstance;
+  private cookies = new Cookies();
 
   constructor() {
     this.client = axios.create({
       baseURL: 'http://localhost:8080/api',
     });
+
+    this.client.interceptors.request.use((config) => {
+      const token = this.cookies.get('token');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    });
+  }
+
+  public getUserRole(): string {
+    const token = this.cookies.get('token');
+    if (token) {
+      const decoded = jwtDecode<MyJwtPayload>(token);
+      if (decoded.role) {
+        return decoded.role;
+      }
+    }
+    return '';
   }
 
   public async login(
@@ -40,6 +66,13 @@ export class LibraryClient {
 
       this.client.defaults.headers.common['Authorization'] =
         `Bearer ${response.data.token}`;
+      const decoded = jwtDecode<MyJwtPayload>(response.data.token);
+
+      if (decoded.exp) {
+        this.cookies.set('token', response.data.token, {
+          expires: new Date(decoded.exp * 1000),
+        });
+      }
 
       return {
         success: true,
@@ -90,6 +123,26 @@ export class LibraryClient {
     try {
       const response: AxiosResponse<BookDetailsDto> = await this.client.get(
         `books/details/${id}`,
+      );
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      return {
+        success: false,
+        data: null,
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
+  }
+
+  public async deleteBook(id: number): Promise<ClientResponse<null>> {
+    try {
+      const response: AxiosResponse<null> = await this.client.delete(
+        `books/delete/${id}`,
       );
       return {
         success: true,
