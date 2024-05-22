@@ -17,12 +17,19 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { mainButtonStyle } from '../styles/buttonStyles';
 import { useApi } from '../api/ApiProvider';
+import { useEffect, useState } from 'react';
 
 export default function MenuAppBar() {
   const navigate = useNavigate();
   const apiClient = useApi();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [userRole, setUserRole] = useState('');
+
+  useEffect(() => {
+    const role = apiClient.getUserRole();
+    setUserRole(role);
+  }, [apiClient]);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -173,6 +180,26 @@ export default function MenuAppBar() {
               >
                 Help
               </MenuItem>
+              {userRole === 'ROLE_ADMIN' && (
+                <>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      navigate('/admin/addBook');
+                    }}
+                  >
+                    Add Book
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      navigate('/admin/addUser');
+                    }}
+                  >
+                    Add User
+                  </MenuItem>
+                </>
+              )}
               <MenuItem
                 onClick={() => {
                   handleClose();

@@ -7,6 +7,8 @@ import ProfilePage from './profle-page/ProfilePage';
 import HelpPage from './help-page/HelpPage';
 import MyLoans from './my-books/my-loans-page/MyLoansPage';
 import ApiProvider from './api/ApiProvider';
+import AddBook from './admin/add-book/AddBook';
+import AddUser from './admin/add-user/AddUser';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/help" element={<HelpPage />} />
           <Route path="/my_books" element={<MyLoans />} />
           <Route path="/bookDetail/:bookId" element={<BookDetails />} />
+          <Route path="/admin/addBook" element={<AddBook />} />
+          <Route path="/admin/addUser" element={<AddUser />} />
         </Routes>
       </ApiProvider>
     </BrowserRouter>
