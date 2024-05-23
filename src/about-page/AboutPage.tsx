@@ -1,8 +1,10 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Tooltip, Typography } from '@mui/material';
 import MenuAppBar from '../navigation/MenuAppBar';
 import Footer from '../navigation/Footer';
 import { Outlet } from 'react-router-dom';
 import { desciptionTextStyle } from '../styles/textStyles';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 function AboutPage() {
   return (
@@ -16,36 +18,85 @@ function AboutPage() {
       >
         <Typography
           sx={{
-            fontSize: 30,
+            fontSize: 35,
             fontWeight: '900',
             fontFamily: 'Lato',
-            marginBottom: 2,
           }}
         >
           About Me
         </Typography>
-        <Typography sx={desciptionTextStyle} marginBottom={'1em'}>
+        <hr
+          style={{
+            border: '1.5px solid #333',
+          }}
+        />
+        <Typography
+          sx={desciptionTextStyle}
+          marginBottom={'1em'}
+          marginTop={'2em'}
+        >
           I'm Ignacy Berent, a passionate software developer from Poland. I'm
           currently studying Medical Informatics at Wrocław University of
           Science and Technology. My interests span across various fields such
           as self-improvement, philosophy, bodybuilding, and trading.
         </Typography>
+        <hr
+          style={{
+            border: '1px solid #666',
+            marginTop: '1em',
+            marginBottom: '1em',
+          }}
+        />
         <Typography sx={desciptionTextStyle} marginBottom={'1em'}>
           I'm a self-taught programmer specializing mainly in data science and
           machine learing in Python. I'm also proficient in app development in
           Flutter. I also have experience in web development with React and
           Spring.
         </Typography>
+        <hr
+          style={{
+            border: '1px solid #666',
+            marginTop: '1em',
+            marginBottom: '1em',
+          }}
+        />
+
         <Typography sx={desciptionTextStyle} marginBottom={'2em'}>
           You can check out my work on{' '}
-          <a href="https://github.com/IgnacyBerent">GitHub</a> and connect with
-          me on{' '}
-          <a href="https://www.linkedin.com/in/ignacy-berent-74b355278">
-            LinkedIn
-          </a>
+          <Tooltip title="My GitHub">
+            <Button
+              variant="outlined"
+              href="https://github.com/IgnacyBerent"
+              startIcon={<GitHubIcon />}
+              sx={{
+                paddingY: '1px',
+                paddingX: '4px',
+                color: 'purple',
+                borderColor: 'purple',
+              }}
+            >
+              GitHub
+            </Button>
+          </Tooltip>{' '}
+          and connect with me on{' '}
+          <Tooltip title="My LinkedIn">
+            <Button
+              variant="outlined"
+              href="https://www.linkedin.com/in/ignacy-berent-74b355278"
+              startIcon={<LinkedInIcon />}
+              sx={{ paddingY: '1px', paddingX: '4px' }}
+            >
+              LinkedIn
+            </Button>
+          </Tooltip>
           .
         </Typography>
-        <Typography sx={desciptionTextStyle} align="center">
+        <hr
+          style={{
+            border: '1.5px solid #333',
+          }}
+        />
+        <Typography sx={desciptionTextStyle} align="center" marginTop={'1em'}>
           Here's a map of my university:
         </Typography>
         <Box
