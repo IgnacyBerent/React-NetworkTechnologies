@@ -5,10 +5,12 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material';
-import { useState, forwardRef } from 'react';
+import { useState, forwardRef, useEffect } from 'react';
 import './LoanItem.css';
 import { LoanDto } from '../../api/dto/loan.dto';
 import AddReviewDialog from './AddReviewDialog';
+import { useApi } from '../../api/ApiProvider';
+import ExtendLoanDialog from './ExtendLoanDialog';
 
 interface LoanItemProps {
   loan: LoanDto;
@@ -30,6 +32,9 @@ const buttonStyle = {
 
 const LoanItem = forwardRef<HTMLDivElement, LoanItemProps>(({ loan }, ref) => {
   const [open, setOpen] = useState(false);
+  const [extendLoanOpen, setExtendLoanOpen] = useState(false);
+  const [extendDays, setExtendDays] = useState(7);
+  const apiClient = useApi();
 
   const handleOpen = () => {
     setOpen(true);
@@ -37,6 +42,38 @@ const LoanItem = forwardRef<HTMLDivElement, LoanItemProps>(({ loan }, ref) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleExtendLoanOpen = () => {
+    setExtendLoanOpen(true);
+  };
+
+  const handleExtendLoanClose = () => {
+    setExtendLoanOpen(false);
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem('loanExtended')) {
+      alert('Loan extended successfully');
+      localStorage.removeItem('loanExtended');
+    }
+  }, []);
+
+  const handleExtendLoanConfirm = async () => {
+    const response = await apiClient.extendLoan(loan.id, extendDays);
+    if (response.success) {
+      setExtendLoanOpen(false);
+      localStorage.setItem('loanExtended', 'true');
+      window.location.reload();
+    } else {
+      console.error('Failed to extend loan');
+      setExtendLoanOpen(false);
+      alert(`Failed to extend loan: ${response.statusCode}`);
+    }
+  };
+
+  const handleDateChange = (value: number) => {
+    setExtendDays(value);
   };
 
   return (
@@ -56,12 +93,13 @@ const LoanItem = forwardRef<HTMLDivElement, LoanItemProps>(({ loan }, ref) => {
         </div>
       </div>
       <div className="buttons-container">
-        {!loan.returnDate && <Button sx={buttonStyle}>Extend Loan</Button>}
         {!loan.returnDate && (
-          <Button
-            onClick={handleOpen} // open the dialog when the button is clicked
-            sx={buttonStyle}
-          >
+          <Button onClick={handleExtendLoanOpen} sx={buttonStyle}>
+            Extend Loan
+          </Button>
+        )}{' '}
+        {!loan.returnDate && (
+          <Button onClick={handleOpen} sx={buttonStyle}>
             Return Book
           </Button>
         )}
@@ -80,6 +118,12 @@ const LoanItem = forwardRef<HTMLDivElement, LoanItemProps>(({ loan }, ref) => {
             <Button onClick={handleClose}>Close</Button>
           </DialogActions>
         </Dialog>
+        <ExtendLoanDialog
+          open={extendLoanOpen}
+          handleClose={handleExtendLoanClose}
+          handleConfirm={handleExtendLoanConfirm}
+          handleDateChange={handleDateChange}
+        />
       </div>
     </div>
   );

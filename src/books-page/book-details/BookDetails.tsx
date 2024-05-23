@@ -69,7 +69,7 @@ function BookDetails() {
 
       const response = await apiClient.takeLoan(loanDto);
       if (response.success) {
-        navigate('/my-books');
+        navigate('/my_books');
         console.log('Loan successful');
       } else {
         console.error('Loan failed', response.statusCode);

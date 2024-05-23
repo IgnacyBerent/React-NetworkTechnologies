@@ -396,6 +396,29 @@ export class LibraryClient {
     }
   }
 
+  public async extendLoan(
+    loanId: number,
+    days: number,
+  ): Promise<ClientResponse<null>> {
+    try {
+      const response: AxiosResponse<null> = await this.client.put(
+        `loans/extend/${loanId}?days=${days}`,
+      );
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      return {
+        success: false,
+        data: null,
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
+  }
+
   public async getCurrentUser(): Promise<ClientResponse<UserDto | null>> {
     try {
       const response: AxiosResponse<UserDto> = await this.client.get('user/me');
