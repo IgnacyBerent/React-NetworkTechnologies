@@ -28,8 +28,8 @@ const Footer = () => {
           <Button onClick={() => navigate('/my_books')} color="inherit">
             My Books
           </Button>
-          <Button onClick={() => navigate('/help')} color="inherit">
-            Help
+          <Button onClick={() => navigate('/about')} color="inherit">
+            About
           </Button>
           {userRole === 'ROLE_ADMIN' && (
             <>

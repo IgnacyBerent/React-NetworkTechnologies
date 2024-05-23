@@ -3,7 +3,7 @@ import BookList from './books-page/book-list/BookList';
 import HomePage from './home-page/HomePage';
 import BookDetails from './books-page/book-details/BookDetails';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import HelpPage from './help-page/HelpPage';
+import AboutPage from './about-page/AboutPage';
 import MyLoans from './my-books/my-loans-page/MyLoansPage';
 import ApiProvider from './api/ApiProvider';
 import AddBook from './admin/AddBook';
@@ -19,7 +19,7 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/books" element={<BookList />} />
-          <Route path="/help" element={<HelpPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/my_books" element={<MyLoans />} />
           <Route path="/bookDetail/:bookId" element={<BookDetails />} />
           <Route path="/admin/addBook" element={<AddBook />} />

@@ -169,10 +169,10 @@ export default function MenuAppBar() {
               <MenuItem
                 onClick={() => {
                   handleClose();
-                  navigate('/help');
+                  navigate('/about');
                 }}
               >
-                Help
+                About
               </MenuItem>
               {userRole === 'ROLE_ADMIN' && (
                 <>
